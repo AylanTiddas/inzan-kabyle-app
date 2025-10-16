@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22 fill=%22%234A7C59%22%3E%25E2%259C%25A7%3C/text%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22 fill=%22%234A7C59%22%3E%E2%9C%A7%3C/text%3E%3C/svg%3E">
     
     <style>
         /* Amélioration de la palette de couleurs et du design général */
@@ -195,6 +195,10 @@
         #splash-logo {
             animation: zoomIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
+        
+        /* Styles pour le bouton "Charger Plus" */
+        #load-more-btn.hidden { display: none; }
+        #load-more-btn.loading { opacity: 0.7; cursor: wait; }
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8 pb-32 sm:pb-8">
@@ -223,7 +227,9 @@
                 <span>Inzan n Teqbaylit</span>
                 <svg width="40" height="40" viewBox="0 0 100 100" class="text-[var(--color-accent)] hidden md:inline-block"><text x="50" y="85" font-size="90" text-anchor="middle" fill="currentColor">ⵣ</text></svg>
             </h1>
-            <p class="text-lg md:text-xl text-[var(--color-text-light)] font-light">Trésors de la Sagesse Kabyle</p>
+            <p class="text-lg text-[var(--color-secondary)] italic font-light">Une Banque de <strong class="text-[var(--color-primary)] font-semibold">"plus de 2000 proverbes"</strong></p>
+            <p class="text-[var(--color-text-light)] font-medium">Découvrez et explorez des milliers de proverbes kabyles (Inzan). Une collection interactive de la sagesse populaire de Kabylie avec des explications, des favoris et une recherche assistée par IA.</p>
+            <span class="block mt-2 font-medium text-[var(--color-primary)]">"Anzi am ddwa, ilaq ad t-yesseqdec umdan akken iwulem."</span>
         </header>
 
         <nav id="desktop-nav" class="hidden sm:flex justify-center mb-8">
@@ -254,11 +260,9 @@
         <main>
             <section id="accueil-tab" class="tab-content" aria-labelledby="proverb-of-the-day-title">
                 <div class="max-w-4xl mx-auto mb-10 text-center p-6 bg-[var(--color-bg-card)]/70 rounded-xl shadow-inner border border-[var(--color-border)]">
-                    <p class="text-lg text-[var(--color-secondary)] italic font-light">
-                        Une Banque de <strong class="text-[var(--color-primary)] font-semibold">"plus de 2000 proverbes"</strong>
-                        <p class="text-[var(--color-text-light)] font-medium">Découvrez et explorez des milliers de proverbes kabyles (Inzan). Une collection interactive de la sagesse populaire de Kabylie avec des explications, des favoris et une recherche assitée par IA.</p>
-                        <span class="block mt-2 font-medium text-[var(--color-primary)]">"Anzi am ddwa, ilaq ad t-yesseqdec umdan akken iwulem."</span>
-                    </p>
+                    <p class="text-lg text-[var(--color-secondary)] italic font-light">Une Banque de <strong class="text-[var(--color-primary)] font-semibold">"plus de 2000 proverbes"</strong></p>
+                    <p class="text-[var(--color-text-light)] font-medium">Découvrez et explorez des milliers de proverbes kabyles (Inzan). Une collection interactive de la sagesse populaire de Kabylie avec des explications, des favoris et une recherche assistée par IA.</p>
+                    <span class="block mt-2 font-medium text-[var(--color-primary)]">"Anzi am ddwa, ilaq ad t-yesseqdec umdan akken iwulem."</span>
                 </div>
                 <h2 id="proverb-of-the-day-title" class="text-3xl font-serif text-[var(--color-primary)] mb-5 text-center font-semibold">Proverbe du Jour 💡</h2>
                 <div id="proverb-of-the-day-card" class="max-w-3xl mx-auto fade-in">
@@ -276,10 +280,10 @@
                         <div>
                             <h3 class="text-xl font-serif font-bold text-[var(--color-heading)] mb-2">Découvrez l'Œuvre Originale</h3>
                             <p class="text-[var(--color-text)] mb-2">
-                                Une partie de cette banque de proverbes est extraite des 4 tomes de l'œuvre magistrale de Monsieur Aomar SIDER : <strong class="text-[var(--color-primary)] font-semibold">"INZAN amek i d-llan"</strong> ("Origines des proverbes et expressions kabyles").
+                                Une partie de cette banque de proverbes est extraite des 4 tomes de l'œuvre magistrale de Monsieur Aomar SIDER : <strong class="text-[var(--color-primary)] font-semibold">"INZAN amek i d-llan"</strong>
                             </p>
                             <p class="text-sm text-[var(--color-text-light)]">
-                        </strong>Son livre, avec les explications étymologiques et l'origine détaillée de chaque proverbe, est disponible à la vente en 4 tomes dans les librairies.</strong>
+                                Son livre, avec les explications étymologiques et l'origine détaillée de chaque proverbe, est disponible à la vente en 4 tomes dans les librairies.
                             </p>
                         </div>
                     </div>
@@ -328,8 +332,10 @@
                     </div>
                 </div>
                 
-                <div id="infinite-scroll-loader" class="text-center mt-8 p-4 hidden">
-                    <span class="loader loader-dark"></span>
+                <div class="text-center mt-8">
+                    <button id="load-more-btn" class="hidden w-full max-w-sm px-8 py-3 bg-[var(--color-primary)] text-white font-semibold rounded-lg shadow-md hover:bg-[var(--color-secondary)] transition-colors duration-300">
+                        Charger 50 proverbes supplémentaires
+                    </button>
                 </div>
 
                 <p id="no-results" class="text-center text-2xl text-[var(--color-text-light)] mt-12 hidden font-serif p-4 border border-dashed rounded-lg">
@@ -426,7 +432,7 @@
                 resultsContainer: document.getElementById('results-container'),
                 resultsFeedback: document.getElementById('results-feedback'),
                 initialLoadMessage: document.getElementById('initial-load-message'),
-                loaderContainer: document.getElementById('infinite-scroll-loader'),
+                loadMoreBtn: document.getElementById('load-more-btn'),
                 favoritesContainer: document.getElementById('favorites-container'),
                 noResults: document.getElementById('no-results'),
                 noFavorites: document.getElementById('no-favorites'),
@@ -463,11 +469,9 @@
                 proverbs: [],
                 favorites: new Set(JSON.parse(localStorage.getItem('inzan_favorites')) || []),
                 trapFocusHandler: null,
-                isCoreDataLoaded: false,
+                isCoreDataLoaded: false, // Vrai dès que le fetch est terminé
                 currentPage: 0,
-                displayedProverbs: [],
-                isLoading: false,
-                totalFilteredCount: 0
+                displayedProverbs: []
             };
             
             // --- FONCTIONS UTILITAIRES ---
@@ -595,95 +599,71 @@
             };
 
             // --- LOGIQUE DE L'ONGLET EXPLORER (FILTRES/PAGINATION) ---
+            const updateLoadMoreButton = (totalFilteredCount) => {
+                if (!state.isCoreDataLoaded) return;
+                const isSearchingOrFiltering = dom.searchInput.value || state.activeTheme !== 'tous';
+                
+                if (!isSearchingOrFiltering || state.displayedProverbs.length >= totalFilteredCount) {
+                    dom.loadMoreBtn.classList.add('hidden');
+                } else {
+                    dom.loadMoreBtn.classList.remove('hidden');
+                    const remaining = totalFilteredCount - state.displayedProverbs.length;
+                    dom.loadMoreBtn.textContent = `Charger ${Math.min(PROVERBS_PER_PAGE, remaining)} proverbes supplémentaires`;
+                }
+            };
+
             const filterProverbs = () => {
                 if (!state.isCoreDataLoaded) return [];
 
                 const query = dom.searchInput.value;
                 const normalizedQuery = normalizeText(query);
                 
-                const hasSearchTerm = normalizedQuery.length > 0;
-                const hasThemeFilter = state.activeTheme !== 'tous';
-                
-                if (!hasSearchTerm && !hasThemeFilter) return [];
+                if (!normalizedQuery && state.activeTheme === 'tous') return [];
                 
                 const keywords = normalizedQuery.split(' ').filter(k => k.length > 0);
 
                 return state.proverbs.filter(p => {
-                    const themeMatch = !hasThemeFilter || p.theme_norm.includes(state.activeTheme);
-                    if (!themeMatch) return false;
-
-                    const queryMatch = !hasSearchTerm || keywords.every(keyword => 
-                        `${p.kabyle_norm} ${p.francais_norm} ${p.theme_norm}`.includes(keyword)
-                    );
-                    return queryMatch;
+                    const themeMatch = state.activeTheme === 'tous' || p.theme_norm.includes(state.activeTheme);
+                    
+                    const queryMatch = keywords.length === 0 ? true : (() => {
+                        const searchableText = `${p.kabyle_norm} ${p.francais_norm} ${p.theme_norm}`;
+                        return keywords.every(keyword => searchableText.includes(keyword));
+                    })();
+                                       
+                    return themeMatch && queryMatch;
                 });
             };
 
             const loadNextChunk = (reset = false) => {
-                if (state.isLoading || !state.isCoreDataLoaded) return;
+                if (!state.isCoreDataLoaded) return;
                 
-                const isSearching = dom.searchInput.value.trim().length > 0 || state.activeTheme !== 'tous';
-
+                const filteredProverbs = filterProverbs();
+                
                 if (reset) {
                     state.currentPage = 0;
                     state.displayedProverbs = [];
                     dom.resultsContainer.innerHTML = '';
-                    window.scrollTo(0, 0);
                     dom.initialLoadMessage.classList.add('hidden');
                 }
                 
-                // If not searching and resetting, don't load anything.
-                if (reset && !isSearching) {
-                    dom.initialLoadMessage.classList.remove('hidden');
+                const startIndex = state.currentPage * PROVERBS_PER_PAGE;
+                const endIndex = startIndex + PROVERBS_PER_PAGE;
+                const chunkToLoad = filteredProverbs.slice(startIndex, endIndex);
+
+                if (chunkToLoad.length === 0 && reset) {
+                    dom.noResults.classList.remove('hidden');
                     dom.resultsFeedback.textContent = '';
+                } else {
                     dom.noResults.classList.add('hidden');
-                    dom.loaderContainer.classList.add('hidden');
-                    return;
+                    dom.resultsFeedback.textContent = `Affichage de ${Math.min(state.displayedProverbs.length + chunkToLoad.length, filteredProverbs.length)} sur ${filteredProverbs.length} proverbes`;
                 }
 
-                // Check if we are already at the end before proceeding
-                if (!reset && state.displayedProverbs.length >= state.totalFilteredCount) {
-                    dom.loaderContainer.classList.add('hidden');
-                    return;
-                }
-
-                state.isLoading = true;
-                dom.loaderContainer.classList.remove('hidden');
-
-                setTimeout(() => {
-                    const filteredProverbs = filterProverbs();
-                    
-                    if (reset) {
-                        state.totalFilteredCount = filteredProverbs.length;
-                    }
-
-                    const startIndex = state.currentPage * PROVERBS_PER_PAGE;
-                    const endIndex = startIndex + PROVERBS_PER_PAGE;
-                    const chunkToLoad = filteredProverbs.slice(startIndex, endIndex);
-
-                    if (chunkToLoad.length === 0 && reset) {
-                        dom.noResults.classList.remove('hidden');
-                        dom.resultsFeedback.textContent = '';
-                    } else {
-                        dom.noResults.classList.add('hidden');
-                        dom.resultsFeedback.textContent = `Affichage de ${Math.min(state.displayedProverbs.length + chunkToLoad.length, state.totalFilteredCount)} sur ${state.totalFilteredCount} proverbes`;
-                    }
-
-                    renderChunk(dom.resultsContainer, chunkToLoad, dom.searchInput.value, true);
-                    
-                    state.displayedProverbs.push(...chunkToLoad);
-                    state.currentPage++;
-                    
-                    if (reset) {
-                        updateAvailableThemes();
-                    }
-
-                    if (state.displayedProverbs.length >= state.totalFilteredCount) {
-                        dom.loaderContainer.classList.add('hidden');
-                    }
-                    
-                    state.isLoading = false;
-                }, 150);
+                renderChunk(dom.resultsContainer, chunkToLoad, dom.searchInput.value, true);
+                
+                state.displayedProverbs.push(...chunkToLoad);
+                state.currentPage++;
+                updateLoadMoreButton(filteredProverbs.length);
+                updateAvailableThemes();
             };
 
             // --- FONCTIONS D'AFFICHAGE ET DE NAVIGATION ---
@@ -959,40 +939,54 @@
             };
 
             // --- GESTION DES ÉVÉNEMENTS ---
-            const setupInfiniteScroll = () => {
-                const observer = new IntersectionObserver((entries) => {
-                    const firstEntry = entries[0];
-                    if (firstEntry.isIntersecting && !state.isLoading) {
-                        loadNextChunk(false);
-                    }
-                }, { threshold: 0.1 });
-
-                observer.observe(dom.loaderContainer);
-            };
-
             const setupEventListeners = () => {
-                dom.searchInput.addEventListener('input', debounce(() => loadNextChunk(true), 350));
+                dom.searchInput.addEventListener('input', debounce(() => {
+                    if (dom.searchInput.value.length < 1 && state.activeTheme === 'tous') {
+                        dom.resultsContainer.innerHTML = '';
+                        dom.initialLoadMessage.classList.remove('hidden');
+                        dom.resultsFeedback.textContent = '';
+                        dom.noResults.classList.add('hidden');
+                        dom.loadMoreBtn.classList.add('hidden');
+                        state.displayedProverbs = [];
+                        updateAvailableThemes();
+                        return;
+                    }
+                    loadNextChunk(true);
+                }, 300));
                 
                 dom.clearSearchBtn.addEventListener('click', () => {
                     dom.searchInput.value = '';
-                    loadNextChunk(true); // This will correctly reset to the initial empty state
+                    dom.resultsContainer.innerHTML = '';
+                    dom.initialLoadMessage.classList.remove('hidden');
+                    dom.resultsFeedback.textContent = '';
+                    dom.noResults.classList.add('hidden');
+                    dom.loadMoreBtn.classList.add('hidden');
+                    state.displayedProverbs = [];
+                    updateAvailableThemes();
                     dom.searchInput.focus();
                 });
                 
+                dom.loadMoreBtn.addEventListener('click', () => {
+                    dom.loadMoreBtn.classList.add('loading');
+                    loadNextChunk(false);
+                    dom.loadMoreBtn.classList.remove('loading');
+                });
+
                 dom.goToExplorerBtn.addEventListener('click', () => setActiveTab('explorer-tab'));
                 
                 dom.randomBtn.addEventListener('click', () => {
                     if (!state.isCoreDataLoaded) return showToast("Veuillez attendre le chargement des proverbes.", true);
 
-                    dom.searchInput.value = '';
-                    resetThemeFilter(false);
+                    const hasActiveFilter = dom.searchInput.value.trim() || state.activeTheme !== 'tous';
+                    const sourceProverbs = hasActiveFilter ? filterProverbs() : state.proverbs;
 
                     dom.initialLoadMessage.classList.add('hidden');
-                    dom.loaderContainer.classList.add('hidden');
+                    dom.loadMoreBtn.classList.add('hidden');
 
-                    if (state.proverbs.length === 0) {
+                    if (sourceProverbs.length === 0) {
                         dom.resultsContainer.innerHTML = '';
                         dom.noResults.classList.remove('hidden');
+                        dom.resultsFeedback.textContent = 'Aucun proverbe ne correspond pour un tirage aléatoire.';
                         state.displayedProverbs = [];
                         updateAvailableThemes();
                         return;
@@ -1002,21 +996,27 @@
 
                     const randomProverbs = [];
                     const usedIds = new Set();
-                    const count = Math.min(20, state.proverbs.length);
+                    const count = Math.min(20, sourceProverbs.length);
 
                     while (randomProverbs.length < count) {
-                        const randomIndex = Math.floor(Math.random() * state.proverbs.length);
-                        const randomProverb = state.proverbs[randomIndex];
+                        const randomIndex = Math.floor(Math.random() * sourceProverbs.length);
+                        const randomProverb = sourceProverbs[randomIndex];
                         if (!usedIds.has(randomProverb.id)) {
                             randomProverbs.push(randomProverb);
                             usedIds.add(randomProverb.id);
                         }
                     }
 
-                    renderChunk(dom.resultsContainer, randomProverbs, '', false);
+                    renderChunk(dom.resultsContainer, randomProverbs, dom.searchInput.value, false);
                     state.displayedProverbs = randomProverbs;
-                    updateAvailableThemes();
-                    dom.resultsFeedback.textContent = `Affichage de ${count} proverbes aléatoires.`;
+                    
+                    let feedback = `Affichage de ${count} proverbes aléatoires`;
+                    if (hasActiveFilter) {
+                        feedback += ` correspondant à vos critères.`;
+                    } else {
+                        feedback += `.`;
+                    }
+                    dom.resultsFeedback.textContent = feedback;
                 });
 
                 window.addEventListener('scroll', () => dom.backToTopBtn.classList.toggle('visible', window.scrollY > 300));
@@ -1055,8 +1055,8 @@
                          const themeToFilter = e.target.closest('.card-theme-badge').dataset.theme;
                          setActiveTab('explorer-tab');
                          setTimeout(() => {
-                            dom.searchInput.value = ''; // Clear search to focus on theme
-                            state.activeTheme = themeToFilter;
+                            dom.searchInput.value = themeToFilter;
+                            resetThemeFilter(false);
                             loadNextChunk(true);
                          }, 100);
                     }
@@ -1065,7 +1065,7 @@
                 dom.modal.closeBtn.addEventListener('click', closeModal);
                 dom.modal.backdrop.addEventListener('click', closeModal);
 
-                dom.aboutBtn.addEventListener('click', () => openModal("À propos de l'Œuvre", `<p>Cette collection numérique est un hommage à la richesse de la sagesse populaire kabyle. Elle est basée sur une partie des données patiemment récoltées par Monsieur <strong>Remḍan At Menṣur</strong> dans son </strong>Dictionnaire</strong> de proverbes Kabyles, dont le travail a permis de préserver et de partager ces trésors culturels.</p><p>Ce site a pour vocation de rendre ces proverbes accessibles à tous, de manière interactive et moderne. Il a été conçu comme un outil d'apprentissage et de découverte, enrichi par des technologies contemporaines pour explorer et comprendre l'esprit de la tradition kabyle.</p>`));
+                dom.aboutBtn.addEventListener('click', () => openModal("À propos de l'Œuvre", `<p>Cette collection numérique est un hommage à la richesse de la sagesse populaire kabyle. Elle est basée sur une partie des données patiemment récoltées par Monsieur <strong>Remḍan At Menṣur</strong> dans son <strong>Dictionnaire</strong> de proverbes Kabyles, dont le travail a permis de préserver et de partager ces trésors culturels.</p><p>Ce site a pour vocation de rendre ces proverbes accessibles à tous, de manière interactive et moderne. Il a été conçu comme un outil d'apprentissage et de découverte, enrichi par des technologies contemporaines pour explorer et comprendre l'esprit de la tradition kabyle.</p>`));
 
                 dom.themeToggle.addEventListener('click', () => {
                     const isDark = dom.html.classList.toggle('dark');
@@ -1089,7 +1089,6 @@
                 dom.themeIcons.dark.classList.toggle('hidden', savedTheme === 'light');
 
                 setupEventListeners();
-                setupInfiniteScroll();
                 setActiveTab('accueil-tab'); 
                 
                 fetch('proverbs.json')
