@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Découvrez et explorez des milliers de proverbes kabyles (Inzan). Une collection interactive de la sagesse populaire de Kabylie avec des explications, des favoris et des suggestions par IA.">
+    <!-- Thème de la barre d'adresse pour le PWA mobile -->
+    <meta name="theme-color" content="#F9F7F3">
+
     <title>Inzan n Teqbaylit - Trésors de la Sagesse Kabyle</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,20 +15,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Icône Favicon et Apple Touch -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22 fill=%22%234A7C59%22%3E%E2%9C%A7%3C/text%3E%3C/svg%3E">
-    
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23F9F7F3%22%3E%3C/rect%3E%3Ctext y=%22.9em%22 font-size=%2290%22 fill=%22%234A7C59%22%3E%E2%9C%A7%3C/text%3E%3C/svg%3E">
+
     <style>
-        /* Amélioration de la palette de couleurs et du design général */
         :root {
-            --color-bg: #F9F7F3; /* Fond légèrement plus chaud */
+            --color-bg: #F9F7F3;
             --color-bg-card: #FFFFFF;
             --color-bg-alt: #F0EFEA;
             --color-text: #3D4A3A;
             --color-text-light: #6B7280;
             --color-heading: #2F4F4F;
-            --color-primary: #4A7C59; /* Vert forêt profond */
+            --color-primary: #4A7C59;
             --color-secondary: #3A644B;
-            --color-accent: #C79A2A; /* Or vieilli */
+            --color-accent: #C79A2A;
             --color-border: #E5E7EB;
             --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.04);
             --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08);
@@ -45,20 +49,28 @@
             --color-secondary: #3E9469;
             --color-accent: #FBBF24;
             --color-border: #374151;
+            --shadow-sm: 0 1px 2px 0 rgb(255 255 255 / 0.04);
+            --shadow-md: 0 4px 6px -1px rgb(255 255 255 / 0.05), 0 2px 4px -2px rgb(255 255 255 / 0.05);
+            --shadow-lg: 0 10px 15px -3px rgb(255 255 255 / 0.05), 0 4px 6px -4px rgb(255 255 255 / 0.05);
+        }
+        
+        html.dark {
+            /* Mettre à jour la couleur du thème pour la barre d'adresse en mode sombre */
+            --theme-color-dark: #101418;
+            meta[name="theme-color"] {
+                content: var(--theme-color-dark);
+            }
         }
 
         body {
             background-color: var(--color-bg);
             font-family: var(--font-sans);
             color: var(--color-text);
-            /* Motif de fond plus subtil et élégant */
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.03'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Amélioration de la lisibilité et des transitions */
         .action-btn, .theme-pill-button, .card-theme-badge, .nav-btn, #back-to-top {
-            /* MODIFIÉ: Remplacement de 'all' pour la performance */
             transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
                         color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
                         transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
@@ -85,7 +97,6 @@
             font-weight: 700;
         }
 
-        /* Animation d'apparition plus douce */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -107,15 +118,6 @@
             animation: fadeIn 0.4s ease-in-out;
         }
 
-        /* Effet de surbrillance amélioré */
-        .highlight {
-            transition: all 0.4s ease;
-            transform: scale(1.02);
-            box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 50%, transparent), var(--shadow-lg);
-            border-radius: 0.75rem; /* Correspond au radius de la carte */
-        }
-
-        /* Toast notification avec une meilleure animation */
         #toast {
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
@@ -125,7 +127,6 @@
             transform: translateY(0);
         }
 
-        /* Styles pour le loader */
         .loader {
             width: 20px;
             height: 20px;
@@ -149,7 +150,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Barre de défilement personnalisée */
         .custom-scrollbar::-webkit-scrollbar { height: 8px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb {
@@ -160,7 +160,6 @@
         }
         html.dark .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #4B5563; }
 
-        /* Styles actifs pour la navigation, plus visibles */
         .nav-btn.active.mobile {
             color: var(--color-primary);
             transform: translateY(-4px) scale(1.1);
@@ -173,7 +172,6 @@
             background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
         }
 
-        /* Styles pour la modale */
         #modal-backdrop.visible {
             opacity: 1;
             pointer-events: auto;
@@ -187,7 +185,6 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Amélioration de la typographie du contenu généré (prose) */
         .prose h3 {
             margin-top: 1.5em;
             margin-bottom: 0.6em;
@@ -209,7 +206,6 @@
             margin-bottom: 0.5em;
         }
         
-        /* Style pour le bouton favori */
         .favorite-btn.favorited svg {
             fill: #EC4899;
             stroke: #EC4899;
@@ -217,7 +213,6 @@
             transform: scale(1.1);
         }
         
-        /* Styles améliorés pour le Quiz */
         .quiz-option {
             border: 2px solid var(--color-border);
             padding: 0.75rem 1rem;
@@ -255,7 +250,6 @@
             opacity: 0.7;
         }
         
-        /* Style pour le bouton de suppression de la recherche */
         .search-wrapper {
             position: relative;
         }
@@ -275,7 +269,6 @@
             cursor: pointer;
         }
 
-        /* Amélioration de l'accessibilité au focus */
         :focus-visible {
             outline: 3px solid var(--color-accent);
             outline-offset: 2px;
@@ -285,7 +278,6 @@
              border-radius: 0.125rem;
         }
         
-        /* Styles pour l'écran de lancement */
         #splash-screen.hidden {
             opacity: 0;
             pointer-events: none;
@@ -351,7 +343,7 @@
             <section id="accueil-tab" class="tab-content" aria-labelledby="proverb-of-the-day-title">
                 <div class="max-w-4xl mx-auto mb-10 text-center p-6 bg-[var(--color-bg-card)]/70 rounded-xl shadow-inner border border-[var(--color-border)]">
                     <p class="text-lg text-[var(--color-secondary)] italic font-light">
-                        Une Banque de <strong class="text-[var(--color-primary)] font-semibold">"plus de 2000 proverbes"</strong>
+                        Une Banque de <strong class="text-[var(--color-primary)] font-semibold" id="proverb-count">...</strong>
                         <p class="text-[var(--color-text-light)] font-medium">Découvrez et explorez des milliers de proverbes kabyles (Inzan). Une collection interactive de la sagesse populaire de Kabylie avec des explications, des favoris et une recherche assistée par IA.</p>
                         <span class="block mt-2 font-medium text-[var(--color-primary)]">"Anzi am ddwa, ilaq ad t-yesseqdec umdan akken iwulem."</span>
                     </p>
@@ -408,7 +400,8 @@
                                 <h3 class="text-sm font-bold text-[var(--color-heading)] flex-shrink-0">Thèmes:</h3>
                                 <div class="flex-grow overflow-x-auto custom-scrollbar">
                                     <div id="theme-list-container" class="flex gap-2 py-1">
-                                        </div>
+                                        <!-- Thèmes chargés par JS -->
+                                    </div>
                                 </div>
                             </div>
                         </nav>
@@ -452,7 +445,9 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
                         <span>✨ Demander conseil</span>
                     </button>
-                    <div id="ai-result-feedback" role="status" aria-live="polite" class="mt-4 min-h-[24px]"></div>
+                    <!-- Zone de feedback pour l'IA, y compris les étapes -->
+                    <div id="ai-step-feedback" role="status" aria-live="polite" class="mt-4 text-center text-sm text-[var(--color-text-light)] min-h-[20px]"></div>
+                    <div id="ai-result-feedback" class="mt-4 min-h-[24px]"></div>
                 </div>
             </section>
 
@@ -513,6 +508,103 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- SERVICE WORKER REGISTRATION ---
+    // Nous codons le Service Worker ici pour le garder dans un seul fichier
+    const registerServiceWorker = () => {
+        if ('serviceWorker' in navigator) {
+            const swScript = `
+                const CACHE_NAME = 'inzan-cache-v2';
+                // AJOUTÉ : URLs des polices Google Fonts à mettre en cache
+                const urlsToCache = [
+                    '/',
+                    '/index.html',
+                    '/proverbs.json',
+                    'https://cdn.tailwindcss.com',
+                    'https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap',
+                    'https://fonts.gstatic.com/s/tinos/v26/buE4poGnedXvwjX2G-jA.woff2', // Tinos Regular
+                    'https://fonts.gstatic.com/s/tinos/v26/buE1poGnedXvwjX-TmjJ-GY.woff2', // Tinos Bold
+                    'https://fonts.gstatic.com/s/raleway/v28/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCFPrE.woff2' // Raleway 
+                    // ... (d'autres variations de polices peuvent être ajoutées si nécessaire)
+                ];
+
+                self.addEventListener('install', event => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then(cache => {
+                                // console.log('Opened cache');
+                                // Mettre en cache les polices de manière non bloquante (certaines peuvent échouer)
+                                const fontCachePromises = urlsToCache.filter(url => url.includes('fonts.g'));
+                                fontCachePromises.forEach(url => {
+                                    cache.add(new Request(url, {mode: 'no-cors'})).catch(err => console.warn('Failed to cache font:', url, err));
+                                });
+                                // Mettre en cache les ressources principales (bloquant)
+                                const coreAssets = urlsToCache.filter(url => !url.includes('fonts.g'));
+                                return cache.addAll(coreAssets);
+                            })
+                    );
+                });
+
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then(response => {
+                                // Cache hit - return response
+                                if (response) {
+                                    return response;
+                                }
+                                // Pas de cache - aller au réseau, puis mettre en cache
+                                return fetch(event.request).then(
+                                    response => {
+                                        if(!response || response.status !== 200 || response.type !== 'basic') {
+                                            // Ne pas mettre en cache les réponses non-OK ou non-basic (ex: CDN)
+                                            return response;
+                                        }
+                                        const responseToCache = response.clone();
+                                        caches.open(CACHE_NAME)
+                                            .then(cache => {
+                                                cache.put(event.request, responseToCache);
+                                            });
+                                        return response;
+                                    }
+                                ).catch(err => {
+                                    // Gérer l'échec de fetch (mode hors-ligne sans cache)
+                                    console.error('Fetch failed:', err);
+                                });
+                            })
+                    );
+                });
+
+                // Activer le nouveau SW et nettoyer les anciens caches
+                self.addEventListener('activate', event => {
+                    const cacheWhitelist = [CACHE_NAME];
+                    event.waitUntil(
+                        caches.keys().then(cacheNames => {
+                            return Promise.all(
+                                cacheNames.map(cacheName => {
+                                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                                        return caches.delete(cacheName);
+                                    }
+                                })
+                            );
+                        })
+                    );
+                });
+            `;
+            // Créer un Blob à partir du script et l'enregistrer
+            const blob = new Blob([swScript], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(blob);
+            navigator.serviceWorker.register(swUrl)
+                .then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                })
+                .catch(error => {
+                    console.log('ServiceWorker registration failed: ', error);
+                });
+        }
+    };
+    // --- FIN DU SERVICE WORKER ---
+
+
     // --- CONSTANTES & ÉLÉMENTS DU DOM ---
     const PROVERBS_PER_PAGE = 50;
     const dom = {
@@ -530,6 +622,7 @@ document.addEventListener('DOMContentLoaded', () => {
         goToExplorerBtn: document.getElementById('go-to-explorer-btn'),
         toast: document.getElementById('toast'),
         proverbOfTheDayCard: document.getElementById('proverb-of-the-day-card'),
+        proverbCount: document.getElementById('proverb-count'),
         randomBtn: document.getElementById('random-btn'),
         backToTopBtn: document.getElementById('back-to-top'),
         themeListContainer: document.getElementById('theme-list-container'),
@@ -552,6 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ai: {
             contextInput: document.getElementById('ai-context-input'),
             suggestBtn: document.getElementById('ai-suggest-btn'),
+            stepFeedback: document.getElementById('ai-step-feedback'),
             resultFeedback: document.getElementById('ai-result-feedback'),
         }
     };
@@ -625,18 +719,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- RENDU UI DYNAMIQUE ---
     const createProverbCardHTML = (proverb, isDaily = false, query = '') => {
         if (!proverb) return '';
-
         const themes = (proverb.theme || '').split(/[,/]/).map(t => t.trim().replace(/[()]/g, '')).filter(Boolean);
         const themesHtml = themes.map(theme =>
             `<button class="card-theme-badge px-2 py-1 rounded-full text-xs font-semibold bg-[var(--color-primary)]/10 text-[var(--color-primary)]" data-theme="${normalizeText(theme)}">${theme.charAt(0).toUpperCase() + theme.slice(1).toLowerCase()}</button>`
         ).join('');
-        
         const cardClasses = isDaily 
             ? `bg-[var(--color-bg-card)] p-6 rounded-xl shadow-2xl border-t-8 border-[var(--color-accent)]`
             : `stagger-in bg-[var(--color-bg-card)] p-5 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col border-l-4 border-[var(--color-primary)]`;
-
         const isFavorited = state.favorites.has(proverb.id);
-        
         return `
         <div class="${cardClasses}" id="proverb-${proverb.id}" data-id="${proverb.id}">
             <div class="flex-grow">
@@ -677,55 +767,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // MODIFIÉ: Accepte une liste de proverbes pour corriger le bug du filtre
     const updateAvailableThemes = (proverbsList) => {
         if (!state.isCoreDataLoaded) return;
-        
-        // MODIFIÉ: Utilise la liste fournie (résultats filtrés) ou la liste complète par défaut
         const source = proverbsList || state.proverbs;
         const allThemesRaw = source.flatMap(p => (p.theme || '').split(/[,/]/).map(t => t.trim().replace(/[()]/g, '')).filter(Boolean));
         const uniqueNormalizedThemes = [...new Map(allThemesRaw.map(t => [normalizeText(t), t.charAt(0).toUpperCase() + t.slice(1).toLowerCase()])).entries()];
         uniqueNormalizedThemes.sort((a, b) => a[1].localeCompare(b[1]));
-
         dom.themeListContainer.innerHTML =
             `<button class="theme-pill-button flex-shrink-0 px-4 py-2 rounded-full bg-[var(--color-bg-alt)] shadow-sm cursor-pointer font-medium text-sm text-[var(--color-text)] hover:bg-[var(--color-primary)]/20" data-theme="tous">Tous</button>` +
             uniqueNormalizedThemes.map(([norm, disp]) =>
                 `<button class="theme-pill-button flex-shrink-0 px-4 py-2 rounded-full bg-[var(--color-bg-alt)] shadow-sm cursor-pointer font-medium text-sm text-[var(--color-text)] hover:bg-[var(--color-primary)]/20" data-theme="${norm}">${disp}</button>`
             ).join('');
-
         const activeThemeButton = dom.themeListContainer.querySelector(`[data-theme="${state.activeTheme}"]`);
         if (activeThemeButton) activeThemeButton.classList.add('active');
     };
 
     // --- LOGIQUE DE L'ONGLET EXPLORER (FILTRES/PAGINATION) ---
-    const filterProverbs = () => {
+    const filterProverbs = (keywords = []) => {
         if (!state.isCoreDataLoaded) return [];
-        const query = dom.searchInput.value;
-        const normalizedQuery = normalizeText(query);
-        const keywords = normalizedQuery.split(' ').filter(k => k.length > 0);
+        
+        // Si aucun mot-clé n'est fourni, utiliser la recherche et le thème globaux
+        if (keywords.length === 0) {
+            const query = dom.searchInput.value;
+            const normalizedQuery = normalizeText(query);
+            keywords = normalizedQuery.split(' ').filter(k => k.length > 0);
 
+            return state.proverbs.filter(p => {
+                const themeMatch = state.activeTheme === 'tous' || (p.theme_norm || '').includes(state.activeTheme);
+                if (!themeMatch) return false;
+                const queryMatch = keywords.length === 0 || keywords.every(keyword => 
+                    `${p.kabyle_norm || ''} ${p.francais_norm || ''} ${p.theme_norm || ''}`.includes(keyword)
+                );
+                return queryMatch;
+            });
+        }
+        
+        // Si des mots-clés SONT fournis (par l'IA), les utiliser pour la recherche
+        const normalizedKeywords = keywords.map(normalizeText);
         return state.proverbs.filter(p => {
-            const themeMatch = state.activeTheme === 'tous' || (p.theme_norm || '').includes(state.activeTheme);
-            if (!themeMatch) return false;
-
-            const queryMatch = keywords.length === 0 || keywords.every(keyword => 
-                `${p.kabyle_norm || ''} ${p.francais_norm || ''} ${p.theme_norm || ''}`.includes(keyword)
-            );
-            return queryMatch;
+            const proverbText = `${p.kabyle_norm || ''} ${p.francais_norm || ''} ${p.theme_norm || ''}`;
+            // Utiliser 'some' pour une recherche plus large (OU logique)
+            return normalizedKeywords.some(keyword => proverbText.includes(keyword));
         });
     };
 
     const loadNextChunk = (reset = false) => {
         if (state.isLoading || !state.isCoreDataLoaded) return;
         const isSearching = dom.searchInput.value.trim().length > 0 || state.activeTheme !== 'tous';
-        
         if (reset) {
             state.currentPage = 0;
             state.displayedProverbs = [];
             dom.resultsContainer.innerHTML = '';
             window.scrollTo(0, 0);
         }
-
         if (!isSearching && reset) {
             dom.initialLoadMessage.classList.remove('hidden');
             dom.noResults.classList.add('hidden');
@@ -733,23 +827,18 @@ document.addEventListener('DOMContentLoaded', () => {
             dom.loaderContainer.classList.add('hidden');
             return;
         }
-        
         dom.initialLoadMessage.classList.add('hidden');
-
         if (!reset && state.displayedProverbs.length >= state.totalFilteredCount) {
              dom.loaderContainer.classList.add('hidden');
              return;
         }
-
         state.isLoading = true;
         dom.loaderContainer.classList.remove('hidden');
         
-        // MODIFIÉ: Suppression du setTimeout de 200ms pour un affichage instantané
-        const filteredProverbs = filterProverbs();
+        const filteredProverbs = filterProverbs(); // Utilise la logique de filtre globale
         if (reset) {
             state.totalFilteredCount = filteredProverbs.length;
         }
-
         const startIndex = state.currentPage * PROVERBS_PER_PAGE;
         const endIndex = startIndex + PROVERBS_PER_PAGE;
         const chunkToLoad = filteredProverbs.slice(startIndex, endIndex);
@@ -764,14 +853,10 @@ document.addEventListener('DOMContentLoaded', () => {
             state.currentPage++;
             dom.resultsFeedback.textContent = `Affichage de ${state.displayedProverbs.length} sur ${state.totalFilteredCount} proverbes`;
         }
-        
-        // MODIFIÉ: Passe la liste complète filtrée pour corriger le bug des thèmes
         if (reset) updateAvailableThemes(filteredProverbs);
-        
         if (state.displayedProverbs.length >= state.totalFilteredCount) {
              dom.loaderContainer.classList.add('hidden');
         }
-
         state.isLoading = false;
     };
 
@@ -793,7 +878,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         dom.tabContents.forEach(content => content.classList.toggle('active', content.id === tabId));
         dom.navButtons.forEach(button => button.classList.toggle('active', button.dataset.tab === tabId));
-
         if (tabId === 'favoris-tab') renderFavorites();
         if (tabId === 'quiz-tab' && state.isCoreDataLoaded && !dom.quizContainer.querySelector('#next-quiz-btn')) startQuiz();
         if (document.body.clientWidth < 640) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -809,11 +893,9 @@ document.addEventListener('DOMContentLoaded', () => {
             showToast("❤️ Ajouté aux favoris !");
         }
         localStorage.setItem('inzan_favorites', JSON.stringify([...state.favorites]));
-        
         document.querySelectorAll(`#proverb-${id} .favorite-btn`).forEach(btn => {
             btn.classList.toggle('favorited', !isFavorited);
         });
-        
         if (document.getElementById('favoris-tab').classList.contains('active')) {
             renderFavorites();
         }
@@ -826,13 +908,10 @@ document.addEventListener('DOMContentLoaded', () => {
         dom.modal.backdrop.classList.add('visible');
         dom.modal.content.classList.add('visible');
         document.body.style.overflow = 'hidden';
-
         const focusableElements = dom.modal.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
         const firstElement = focusableElements[0];
         const lastElement = focusableElements[focusableElements.length - 1];
-        
         firstElement?.focus();
-
         state.trapFocusHandler = (e) => {
             if (e.key === 'Tab') {
                 if (e.shiftKey) {
@@ -840,8 +919,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         lastElement.focus();
                         e.preventDefault();
                     }
-                } 
-                else {
+                } else {
                     if (document.activeElement === lastElement) {
                         firstElement.focus();
                         e.preventDefault();
@@ -864,10 +942,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
+    // --- NOUVELLE LOGIQUE API GEMINI (PIPELINE RAG) ---
     const callGeminiAPI = async (payload, expectJson = false) => {
         const GEMINI_API_KEY = "AIzaSyD3cGyEYYhNbFN6WlMKb5wjpdDqfR8RaN4";
         if (!GEMINI_API_KEY) throw new Error("La clé API n'est pas configurée dans le code source.");
 
+        // Rétabli au modèle du fichier original
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`;
         
         if (expectJson) payload.generationConfig = { responseMimeType: "application/json" };
@@ -907,31 +987,73 @@ Soyez concis et direct.`;
         }
     };
     
+    // ÉTAPE 1 du Sage AI : Obtenir des mots-clés
+    const getAISuggestion_Stage1_GetKeywords = async (context) => {
+        dom.ai.stepFeedback.textContent = "Étape 1/2 : Analyse de la situation...";
+        const systemPrompt = `Vous êtes un expert en recherche sémantique spécialisé dans la culture kabyle.
+Analysez la situation de l'utilisateur. Votre unique tâche est de générer 5 mots-clés (en français ou kabyle) pertinents pour trouver un proverbe.
+Répondez UNIQUEMENT avec un objet JSON au format: { "keywords": ["mot1", "mot2", "mot3", "mot4", "mot5"] }`;
+        
+        return callGeminiAPI({
+            contents: [{ parts: [{ text: `Situation utilisateur: "${context}"` }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] }
+        }, true);
+    };
+
+    // ÉTAPE 2 du Sage AI : Sélectionner parmi les candidats
+    const getAISuggestion_Stage2_GetFinalSelection = async (context, candidateProverbs) => {
+        dom.ai.stepFeedback.textContent = "Étape 2/2 : Sélection des meilleurs proverbes...";
+        const systemPrompt = `Vous êtes un sage kabyle expert en proverbes.
+Analysez la situation de l'utilisateur. On vous fournit une LISTE PRÉ-FILTRÉE de proverbes potentiellement pertinents.
+Votre tâche est de choisir les 3 MEILLEURS proverbes de cette liste et de justifier brièvement pourquoi chacun est adapté.
+Répondez OBLIGATOIREMENT avec un objet JSON au format:
+{ "reasoning": "Votre analyse générale de la situation en une phrase.", "proverbs": [ { "id": <id_du_proverbe_1>, "justification": "Pourquoi ce proverbe est pertinent." } ] }`;
+
+        const userPrompt = `Situation de l'utilisateur: "${context}"
+
+Liste des proverbes pré-filtrés pertinents:
+${JSON.stringify(candidateProverbs)}
+
+Choisissez les 3 meilleurs et répondez UNIQUEMENT avec l'objet JSON demandé.`;
+
+        return callGeminiAPI({
+            contents: [{ parts: [{ text: userPrompt }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] }
+        }, true);
+    };
+
+    // Fonction principale du Sage AI (Pipeline RAG)
     const getAISuggestion = async (context) => {
         dom.ai.suggestBtn.disabled = true;
         dom.ai.suggestBtn.innerHTML = `<span class="loader"></span> <span>Analyse...</span>`;
         dom.ai.resultFeedback.innerHTML = '';
-
-        const rawProverbs = state.proverbs.map(({ kabyle, francais, theme, explication }, id) => ({ id, kabyle, francais, theme, explication }));
-        const systemPrompt = `Vous êtes un sage kabyle expert en proverbes.
-Analysez la situation de l'utilisateur et choisissez jusqu'à 3 proverbes les plus pertinents à partir de la liste fournie.
-Vous devez OBLIGATOIREMENT répondre avec un objet JSON valide et rien d'autre.`;
-        const userPrompt = `Situation de l'utilisateur: "${context}"
-
-Liste des proverbes disponibles (limité pour l'exemple):
-${JSON.stringify(rawProverbs.slice(0, 500))}
-
-Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un objet JSON au format suivant:
-{ "reasoning": "Votre analyse générale de la situation en une phrase.", "proverbs": [ { "id": <id_du_proverbe_1>, "justification": "Pourquoi ce proverbe est pertinent." } ] }`;
-
+        
         try {
-            const suggestion = await callGeminiAPI({
-                contents: [{ parts: [{ text: userPrompt }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] }
-            }, true);
+            // --- ÉTAPE 1: OBTENIR LES MOTS-CLÉS ---
+            const keywordsResponse = await getAISuggestion_Stage1_GetKeywords(context);
+            if (!keywordsResponse || !keywordsResponse.keywords) {
+                throw new Error("L'IA n'a pas pu générer de mots-clés.");
+            }
+            const keywords = keywordsResponse.keywords;
+            dom.ai.stepFeedback.textContent = `Étape 1/2 : Mots-clés trouvés : ${keywords.join(', ')}`;
+            
+            // --- ÉTAPE 2: RECHERCHE LOCALE ---
+            const localSearchResults = filterProverbs(keywords); // Utilise la fonction de filtre avec les mots-clés de l'IA
+            if (localSearchResults.length === 0) {
+                 dom.ai.resultFeedback.innerHTML = `<p class="text-center text-[var(--color-text-light)]">Le sage n'a pas trouvé de proverbe correspondant à ces thèmes dans la base de données.</p>`;
+                 resetAIButton();
+                 return;
+            }
+
+            // Limiter aux 30 meilleurs résultats pour l'IA
+            const candidates = localSearchResults.slice(0, 30).map(p => ({ id: p.id, kabyle: p.kabyle, francais: p.francais, theme: p.theme }));
+
+            // --- ÉTAPE 3: SÉLECTION FINALE PAR L'IA ---
+            const suggestion = await getAISuggestion_Stage2_GetFinalSelection(context, candidates);
 
             if (!suggestion || !suggestion.proverbs || suggestion.proverbs.length === 0) {
-                 dom.ai.resultFeedback.innerHTML = `<p class="text-center text-[var(--color-text-light)]">Le sage n'a pas trouvé de proverbe parfaitement adapté. Essayez de reformuler.</p>`;
+                 dom.ai.resultFeedback.innerHTML = `<p class="text-center text-[var(--color-text-light)]">Le sage a analysé les résultats mais n'a pas trouvé de correspondance parfaite. Essayez de reformuler.</p>`;
+                 resetAIButton();
                  return;
             }
 
@@ -947,12 +1069,18 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
                 }
             });
             dom.ai.resultFeedback.innerHTML = htmlResult;
+
         } catch (e) {
             dom.ai.resultFeedback.innerHTML = `<p class="text-red-500 text-center">Le sage doit se reposer. Une erreur est survenue.<br><strong>Détail :</strong> ${e.message}</p>`;
         } finally {
-            dom.ai.suggestBtn.disabled = false;
-            dom.ai.suggestBtn.innerHTML = `✨ Demander conseil`;
+            resetAIButton();
         }
+    };
+
+    const resetAIButton = () => {
+        dom.ai.suggestBtn.disabled = false;
+        dom.ai.suggestBtn.innerHTML = `✨ Demander conseil`;
+        dom.ai.stepFeedback.textContent = "";
     };
 
     // --- LOGIQUE DU QUIZ ---
@@ -997,7 +1125,6 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
                 ${options.map(opt => `<div class="quiz-option" data-id="${opt.id}" tabindex="0">${opt.francais}</div>`).join('')}
             </div><div id="quiz-feedback" class="mt-6 text-center"></div>`;
         
-        // MODIFIÉ: Ajout de la gestion du clavier (Enter/Space) pour l'accessibilité
         const optionsContainer = dom.quizContainer.querySelector('#quiz-options');
         const handleSelection = (target) => {
             const selectedOption = target.closest('.quiz-option');
@@ -1017,7 +1144,7 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
     const generateThemeQuestion = (quizProverbs) => {
         const proverb = quizProverbs[Math.floor(Math.random() * quizProverbs.length)];
         const correctThemes = (proverb.theme || '').split(/[,/]/).map(t => t.trim().replace(/[()]/g, '')).filter(Boolean);
-        if (correctThemes.length === 0) { // Fallback if a proverb has no theme
+        if (correctThemes.length === 0) {
             startQuiz();
             return;
         }
@@ -1039,7 +1166,6 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
                 ${options.map(opt => `<div class="quiz-option text-center" data-theme="${opt}" tabindex="0">${opt}</div>`).join('')}
             </div><div id="quiz-feedback" class="mt-6 text-center"></div>`;
         
-        // MODIFIÉ: Ajout de la gestion du clavier (Enter/Space) pour l'accessibilité
         const optionsContainer = dom.quizContainer.querySelector('#quiz-options');
         const handleSelection = (target) => {
             const selectedOption = target.closest('.quiz-option');
@@ -1060,7 +1186,6 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
         const isCorrect = (type === 'meaning') ?
             parseInt(selectedElement.dataset.id) === correctAnswer.id :
             normalizeText(selectedElement.dataset.theme) === normalizeText(correctAnswer);
-
         document.querySelectorAll('.quiz-option').forEach(el => {
             el.setAttribute('disabled', true);
             const elIsCorrect = (type === 'meaning') ?
@@ -1068,17 +1193,13 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
                 normalizeText(el.dataset.theme) === normalizeText(correctAnswer);
             if(elIsCorrect) el.classList.add('correct');
         });
-
         if(!isCorrect) selectedElement.classList.add('incorrect');
-        
         const feedback = dom.quizContainer.querySelector('#quiz-feedback');
         const correctAnswerText = type === 'meaning' ? correctAnswer.francais : correctAnswer;
-        
         feedback.innerHTML = `
             <p class="text-xl font-bold ${isCorrect ? 'text-green-500' : 'text-red-500'}">${isCorrect ? 'Bravo !' : 'Dommage !'}</p>
             ${!isCorrect ? `<p class="mt-2">La bonne réponse était : <strong class="font-semibold">"${correctAnswerText}"</strong></p>` : ''}
             <button id="next-quiz-btn" class="mt-4 px-6 py-2 bg-[var(--color-primary)] text-white font-semibold rounded-lg shadow-md hover:scale-105 transition-transform">Question suivante</button>`;
-            
         const nextBtn = document.getElementById('next-quiz-btn');
         nextBtn.addEventListener('click', startQuiz);
         nextBtn.focus();
@@ -1109,15 +1230,10 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
             if (!state.isCoreDataLoaded) {
                 return showToast("Veuillez attendre le chargement des proverbes.", true);
             }
-            
-            // La fonction filterProverbs utilise déjà la recherche et le thème actuels
             const matchingProverbs = filterProverbs();
-
-            // Cacher les messages et loaders
             dom.initialLoadMessage.classList.add('hidden');
             dom.loaderContainer.classList.add('hidden');
             dom.resultsContainer.innerHTML = '';
-            
             if (matchingProverbs.length === 0) {
                 dom.noResults.classList.remove('hidden');
                 dom.resultsFeedback.textContent = 'Aucun proverbe ne correspond à vos critères pour un tirage aléatoire.';
@@ -1125,36 +1241,20 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
                 updateAvailableThemes();
                 return;
             }
-
             dom.noResults.classList.add('hidden');
-            
-            // Mélanger tous les proverbes correspondants
             const shuffledProverbs = matchingProverbs.sort(() => 0.5 - Math.random());
-            
-            // Sélectionner un sous-ensemble à afficher
             const count = Math.min(20, shuffledProverbs.length);
             const randomSelection = shuffledProverbs.slice(0, count);
-            
-            // Afficher la nouvelle sélection aléatoire
             renderChunk(dom.resultsContainer, randomSelection, dom.searchInput.value, false);
-            
-            // MODIFIÉ: Correction du bug de pagination après un tirage aléatoire
-            state.totalFilteredCount = randomSelection.length; // Signale que le total est juste ce qui est affiché
-            state.currentPage = 1; // Signale que la "page 1" (de 1) est chargée, empêchant le scroll infini
-
-            // Mettre à jour l'état de l'application
+            state.totalFilteredCount = randomSelection.length;
+            state.currentPage = 1;
             state.displayedProverbs = randomSelection;
-            
-            // MODIFIÉ: Passe la sélection aléatoire pour que les thèmes correspondent
             updateAvailableThemes(randomSelection);
-            
-            // Mettre à jour le message de feedback
             dom.resultsFeedback.textContent = `Affichage d'une sélection aléatoire de ${count} sur ${matchingProverbs.length} proverbes correspondants.`;
         });
         
         window.addEventListener('scroll', () => dom.backToTopBtn.classList.toggle('visible', window.scrollY > 300));
         dom.backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
         dom.navButtons.forEach(button => button.addEventListener('click', () => setActiveTab(button.dataset.tab)));
 
         dom.themeListContainer.addEventListener('click', (e) => {
@@ -1171,11 +1271,9 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
         document.body.addEventListener('click', e => {
             const card = e.target.closest('[data-id]');
             if (!card) return;
-
             const proverbId = parseInt(card.dataset.id);
             const proverb = state.proverbs.find(p => p.id === proverbId);
             if (!proverb) return;
-
             if (e.target.closest('.explain-btn')) getProverbExplanation(proverb);
             if (e.target.closest('.favorite-btn')) toggleFavorite(proverbId);
             if (e.target.closest('.copy-btn')) navigator.clipboard.writeText(`« ${proverb.kabyle} »\n— ${proverb.francais}`).then(() => showToast("✅ Proverbe copié !"));
@@ -1210,6 +1308,8 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
             localStorage.setItem('inzan_theme', isDark ? 'dark' : 'light');
             dom.themeIcons.light.classList.toggle('hidden', isDark);
             dom.themeIcons.dark.classList.toggle('hidden', !isDark);
+            // Mettre à jour le meta theme-color
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#101418' : '#F9F7F3');
         });
         
         dom.ai.suggestBtn.addEventListener('click', () => {
@@ -1225,6 +1325,10 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
         dom.html.classList.toggle('dark', savedTheme === 'dark');
         dom.themeIcons.light.classList.toggle('hidden', savedTheme === 'dark');
         dom.themeIcons.dark.classList.toggle('hidden', savedTheme === 'light');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', savedTheme === 'dark' ? '#101418' : '#F9F7F3');
+
+        // Enregistrer le Service Worker
+        registerServiceWorker();
 
         setupEventListeners();
         setupInfiniteScroll();
@@ -1247,12 +1351,19 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
                     theme_norm: normalizeText(p.theme)
                 }));
                 state.isCoreDataLoaded = true;
+                
+                dom.proverbCount.textContent = `plus de ${state.proverbs.length} proverbes`;
 
-                const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
-                const dailyProverb = state.proverbs[dayOfYear % state.proverbs.length];
-                dom.proverbOfTheDayCard.innerHTML = createProverbCardHTML(dailyProverb, true);
-
-                // MODIFIÉ: Appel initial pour charger tous les thèmes
+                // Logique du proverbe du jour (isolée pour la robustesse)
+                try {
+                    const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+                    const dailyProverb = state.proverbs[dayOfYear % state.proverbs.length];
+                    dom.proverbOfTheDayCard.innerHTML = createProverbCardHTML(dailyProverb, true);
+                } catch (e) {
+                    console.error("Failed to load daily proverb:", e);
+                    dom.proverbOfTheDayCard.innerHTML = `<p class="text-center text-red-500 p-4">Erreur lors du chargement du proverbe du jour.</p>`;
+                }
+                
                 updateAvailableThemes(state.proverbs);
                 
                 setTimeout(() => dom.splashScreen.classList.add('hidden'), 500);
@@ -1267,7 +1378,7 @@ Choisissez les proverbes les plus appropriés et répondez UNIQUEMENT avec un ob
                 </div>`;
                 dom.resultsContainer.innerHTML = `<div class="md:col-span-2 xl:col-span-3">${errorMessage}</div>`;
                 dom.initialLoadMessage.classList.add('hidden');
-                dom.proverbOfTheDayCard.innerHTML = `<p class="text-center text-red-500">Erreur de chargement.</p>`;
+                dom.proverbOfTheDayCard.innerHTML = `<p class="text-center text-red-500">Erreur critique des données.</p>`;
                 dom.themeListContainer.innerHTML = `<p class="text-center text-red-500 text-sm">Erreur.</p>`;
                 dom.quizContainer.innerHTML = `<p class="text-center text-red-500">Erreur de chargement des données.</p>`;
                 setTimeout(() => dom.splashScreen.classList.add('hidden'), 100);
