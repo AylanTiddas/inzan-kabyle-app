@@ -4,8 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Découvrez et explorez des milliers de proverbes kabyles (Inzan). Une collection interactive de la sagesse populaire de Kabylie avec des explications, des favoris et des suggestions par IA.">
-    <!-- Thème de la barre d'adresse pour le PWA mobile -->
+    
+    <!-- AMÉLIORATION : Méta-données PWA et Partage Social -->
     <meta name="theme-color" content="#F9F7F3">
+    
+    <!-- Méta-données Open Graph (pour Facebook, WhatsApp, etc.) -->
+    <meta property="og:title" content="Inzan n Teqbaylit - Trésors de la Sagesse Kabyle">
+    <meta property="og:description" content="Explorez des milliers de proverbes kabyles (Inzan) avec explications et suggestions par IA.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="httpsS://votre-url-ici.com"> <!-- Mettez votre URL de production ici -->
+    <!-- AMÉLIORATION : Ajout d'une image pour le partage. Créez un 'og-image.png' (1200x630) -->
+    <!-- <meta property="og:image" content="httpsS://votre-url-ici.com/og-image.png"> -->
+
+    <!-- Méta-données Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Inzan n Teqbaylit - Trésors de la Sagesse Kabyle">
+    <meta name="twitter:description" content="Explorez des milliers de proverbes kabyles (Inzan) avec explications et suggestions par IA.">
+    <!-- <meta name="twitter:image" content="httpsS://votre-url-ici.com/og-image.png"> -->
+
+    <!-- AMÉLIORATION : Manifeste PWA en ligne pour "Ajouter à l'écran d'accueil" -->
+    <link rel="manifest" href="data:application/json,{
+        &quot;name&quot;: &quot;Inzan n Teqbaylit&quot;,
+        &quot;short_name&quot;: &quot;Inzan&quot;,
+        &quot;start_url&quot;: &quot;.&quot;,
+        &quot;display&quot;: &quot;standalone&quot;,
+        &quot;background_color&quot;: &quot;#F9F7F3&quot;,
+        &quot;theme_color&quot;: &quot;#4A7C59&quot;,
+        &quot;description&quot;: &quot;Trésors de la Sagesse Kabyle&quot;,
+        &quot;icons&quot;: [
+            { &quot;src&quot;: &quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23F9F7F3'%3E%3C/rect%3E%3Ctext y='.9em' font-size='90' fill='%234A7C59'%3E%E2%9C%A7%3C/text%3E%3C/svg%3E&quot;, &quot;sizes&quot;: &quot;192x192&quot;, &quot;type&quot;: &quot;image/svg+xml&quot; },
+            { &quot;src&quot;: &quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23F9F7F3'%3E%3C/rect%3E%3Ctext y='.9em' font-size='90' fill='%234A7C59'%3E%E2%9C%A7%3C/text%3E%3C/svg%3E&quot;, &quot;sizes&quot;: &quot;512x512&quot;, &quot;type&quot;: &quot;image/svg+xml&quot; }
+        ]
+    }">
+    <!-- FIN AMÉLIORATION PWA/Partage -->
 
     <title>Inzan n Teqbaylit - Trésors de la Sagesse Kabyle</title>
     
@@ -291,7 +322,8 @@
 
     <div id="splash-screen" class="fixed inset-0 bg-[var(--color-bg)] z-[200] flex flex-col items-center justify-center transition-opacity duration-700 ease-out">
         <div id="splash-logo" class="opacity-0">
-            <svg width="100" height="100" viewBox="0 0 100 100" class="text-[var(--color-accent)]">
+            <!-- AMÉLIORATION : Ajout de aria-hidden pour l'accessibilité (l'icône est décorative) -->
+            <svg width="100" height="100" viewBox="0 0 100 100" class="text-[var(--color-accent)]" aria-hidden="true">
                 <text x="50" y="85" font-size="90" text-anchor="middle" fill="currentColor">ⵣ</text>
             </svg>
         </div>
@@ -374,10 +406,7 @@
                     </div>
                 </div>
 
-                <footer class="text-center mt-16 py-6 border-t-2 border-[var(--color-border)]">
-                    <p class="text-[var(--color-text-light)] font-medium">Une collection de la sagesse populaire kabyle.</p>
-                    <p class="text-sm text-[var(--color-text-light)] mt-1">Application développée par TAMAZIRT Boussad. <button id="about-btn" class="text-[var(--color-primary)] underline">En savoir plus</button>.</p>
-                </footer>
+                <!-- AMÉLIORATION : Footer déplacé hors de l'onglet et caché sur mobile -->
             </section>
 
             <section id="explorer-tab" class="tab-content" aria-labelledby="explorer-title">
@@ -418,8 +447,9 @@
                     </div>
                 </div>
 
-                <div id="infinite-scroll-loader" class="text-center mt-8 p-4 hidden">
-                    <span class="loader loader-dark"></span>
+                <!-- AMÉLIORATION : Ajout de role="status" pour l'accessibilité du loader -->
+                <div id="infinite-scroll-loader" role="status" class="text-center mt-8 p-4 hidden">
+                    <span class="loader loader-dark" aria-label="Chargement de plus de proverbes"></span>
                 </div>
                 <p id="no-results" class="text-center text-2xl text-[var(--color-text-light)] mt-12 hidden font-serif p-4 border border-dashed rounded-lg">
                     😔 Aucun proverbe ne correspond à votre recherche.<br>
@@ -461,6 +491,12 @@
                 </div>
             </section>
         </main>
+
+        <!-- AMÉLIORATION : Footer déplacé ici, hors de <main> et des onglets, et caché sur mobile -->
+        <footer class="text-center mt-16 py-6 border-t-2 border-[var(--color-border)] hidden sm:block">
+            <p class="text-[var(--color-text-light)] font-medium">Une collection de la sagesse populaire kabyle.</p>
+            <p class="text-sm text-[var(--color-text-light)] mt-1">Application développée par TAMAZIRT Boussad. <button id="about-btn" class="text-[var(--color-primary)] underline">En savoir plus</button>.</p>
+        </footer>
     </div>
 
     <nav id="mobile-nav" class="sm:hidden fixed bottom-4 left-4 right-4 bg-[var(--color-bg-card)]/80 backdrop-blur-lg border border-[var(--color-border)] flex justify-around shadow-2xl z-50 rounded-full p-1">
@@ -773,6 +809,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const allThemesRaw = source.flatMap(p => (p.theme || '').split(/[,/]/).map(t => t.trim().replace(/[()]/g, '')).filter(Boolean));
         const uniqueNormalizedThemes = [...new Map(allThemesRaw.map(t => [normalizeText(t), t.charAt(0).toUpperCase() + t.slice(1).toLowerCase()])).entries()];
         uniqueNormalizedThemes.sort((a, b) => a[1].localeCompare(b[1]));
+        
+        // AMÉLIORATION : Récupérer le thème sauvegardé
+        state.activeTheme = localStorage.getItem('inzan_theme_filter') || 'tous';
+        
         dom.themeListContainer.innerHTML =
             `<button class="theme-pill-button flex-shrink-0 px-4 py-2 rounded-full bg-[var(--color-bg-alt)] shadow-sm cursor-pointer font-medium text-sm text-[var(--color-text)] hover:bg-[var(--color-primary)]/20" data-theme="tous">Tous</button>` +
             uniqueNormalizedThemes.map(([norm, disp]) =>
@@ -944,15 +984,19 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- NOUVELLE LOGIQUE API GEMINI (PIPELINE RAG) ---
     const callGeminiAPI = async (payload, expectJson = false) => {
+        // --- NE PAS TOUCHER ---
         const GEMINI_API_KEY = "AIzaSyD3cGyEYYhNbFN6WlMKb5wjpdDqfR8RaN4";
+        // --- NE PAS TOUCHER ---
+        
         if (!GEMINI_API_KEY) throw new Error("La clé API n'est pas configurée dans le code source.");
 
-        // Rétabli au modèle du fichier original
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`;
+        // AMÉLIORATION : Modèle mis à jour vers la dernière version
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${GEMINI_API_KEY}`;
         
         if (expectJson) payload.generationConfig = { responseMimeType: "application/json" };
 
-        // --- AMÉLIORATION: Ajout d'une logique de relance (Exponential Backoff) ---
+        // --- AMÉLIORATION: Logique de relance (Exponential Backoff) ---
+        // (Cette logique était déjà présente et bien implémentée, je la conserve)
         const MAX_RETRIES = 5;
         let delay = 1000; // 1 seconde de base
 
@@ -966,6 +1010,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     const result = await response.json();
+
+                    // AMÉLIORATION : Vérifier les blocages de sécurité (Safety Feedback)
+                    if (result.promptFeedback && result.promptFeedback.blockReason) {
+                        console.warn('API call blocked:', result.promptFeedback);
+                        throw new Error(`La requête a été bloquée : ${result.promptFeedback.blockReason}`);
+                    }
+                    
                     const textResponse = result.candidates?.[0]?.content?.parts?.[0]?.text;
                     if (!textResponse) throw new Error("Réponse de l'API malformée ou vide.");
                     
@@ -982,7 +1033,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Gérer les erreurs qui méritent une relance (ex: surcharge, erreur serveur)
-                // C'est exactement l'erreur que vous avez mentionnée !
                 if (response.status === 429 || response.status === 503 || response.status === 500) {
                     console.warn(`API Error ${response.status}. Retrying in ${delay}ms...`);
                     await new Promise(resolve => setTimeout(resolve, delay));
@@ -1301,7 +1351,8 @@ Choisissez le ou les proverbes les plus pertinents (le nombre n'est pas fixe) et
         dom.themeListContainer.addEventListener('click', (e) => {
             if (e.target.matches('.theme-pill-button')) {
                 state.activeTheme = e.target.dataset.theme;
-                sessionStorage.setItem('inzan_theme_filter', state.activeTheme);
+                // AMÉLIORATION : Persistance du filtre de thème dans localStorage
+                localStorage.setItem('inzan_theme_filter', state.activeTheme);
                 dom.themeListContainer.querySelector('.active')?.classList.remove('active');
                 e.target.classList.add('active');
                 e.target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
@@ -1333,6 +1384,8 @@ Choisissez le ou les proverbes les plus pertinents (le nombre n'est pas fixe) et
                  setTimeout(() => {
                     dom.searchInput.value = '';
                     state.activeTheme = themeToFilter;
+                    // AMÉLIORATION : Mettre à jour localStorage également ici
+                    localStorage.setItem('inzan_theme_filter', state.activeTheme);
                     loadNextChunk(true);
                  }, 100);
             }
@@ -1395,17 +1448,30 @@ Choisissez le ou les proverbes les plus pertinents (le nombre n'est pas fixe) et
                 
                 dom.proverbCount.textContent = `plus de ${state.proverbs.length} proverbes`;
 
-                // Logique du proverbe du jour (isolée pour la robustesse)
-                try {
-                    const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
-                    const dailyProverb = state.proverbs[dayOfYear % state.proverbs.length];
-                    dom.proverbOfTheDayCard.innerHTML = createProverbCardHTML(dailyProverb, true);
-                } catch (e) {
-                    console.error("Failed to load daily proverb:", e);
-                    dom.proverbOfTheDayCard.innerHTML = `<p class="text-center text-red-500 p-4">Erreur lors du chargement du proverbe du jour.</p>`;
+                // AMÉLIORATION : Logique du proverbe du jour plus robuste
+                if (state.proverbs.length > 0) {
+                    try {
+                        const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+                        const dailyProverb = state.proverbs[dayOfYear % state.proverbs.length];
+                        dom.proverbOfTheDayCard.innerHTML = createProverbCardHTML(dailyProverb, true);
+                    } catch (e) {
+                        console.error("Failed to load daily proverb (fallback):", e);
+                        // Fallback vers un proverbe aléatoire en cas d'erreur
+                        const randomProverb = state.proverbs[Math.floor(Math.random() * state.proverbs.length)];
+                        dom.proverbOfTheDayCard.innerHTML = createProverbCardHTML(randomProverb, true);
+                    }
+                } else {
+                    dom.proverbOfTheDayCard.innerHTML = `<p class="text-center text-[var(--color-text-light)] p-4">Aucun proverbe n'a été trouvé.</p>`;
                 }
                 
                 updateAvailableThemes(state.proverbs);
+                
+                // AMÉLIORATION : Charger les filtres après le chargement des thèmes
+                const savedActiveTheme = localStorage.getItem('inzan_theme_filter');
+                if (savedActiveTheme && savedActiveTheme !== 'tous') {
+                    state.activeTheme = savedActiveTheme;
+                    loadNextChunk(true);
+                }
                 
                 setTimeout(() => dom.splashScreen.classList.add('hidden'), 500);
             })
@@ -1431,4 +1497,3 @@ Choisissez le ou les proverbes les plus pertinents (le nombre n'est pas fixe) et
 </script>
 </body>
 </html>
-
