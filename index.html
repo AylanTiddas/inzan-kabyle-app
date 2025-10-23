@@ -1045,7 +1045,8 @@ Répondez UNIQUEMENT avec un objet JSON au format: { "keywords": ["mot1", "mot2"
         dom.ai.stepFeedback.textContent = "Étape 2/2 : Sélection des meilleurs proverbes...";
         const systemPrompt = `Vous êtes un sage kabyle expert en proverbes.
 Analysez la situation de l'utilisateur. On vous fournit une LISTE PRÉ-FILTRÉE de proverbes potentiellement pertinents.
-Votre tâche est de choisir les 3 MEILLEURS proverbes de cette liste et de justifier brièvement pourquoi chacun est adapté.
+Votre tâche est de choisir le ou les meilleurs proverbes de cette liste et de justifier brièvement pourquoi chacun est adapté.
+Le nombre n'est pas fixe ; choisissez-en 1, 2, 3, ou plus, tant qu'ils sont hautement pertinents. S'il n'y en a qu'un seul de vraiment bon, n'en choisissez qu'un.
 Répondez OBLIGATOIREMENT avec un objet JSON au format:
 { "reasoning": "Votre analyse générale de la situation en une phrase.", "proverbs": [ { "id": <id_du_proverbe_1>, "justification": "Pourquoi ce proverbe est pertinent." } ] }`;
 
@@ -1054,7 +1055,7 @@ Répondez OBLIGATOIREMENT avec un objet JSON au format:
 Liste des proverbes pré-filtrés pertinents:
 ${JSON.stringify(candidateProverbs)}
 
-Choisissez les 3 meilleurs et répondez UNIQUEMENT avec l'objet JSON demandé.`;
+Choisissez le ou les proverbes les plus pertinents (le nombre n'est pas fixe) et répondez UNIQUEMENT avec l'objet JSON demandé.`;
 
         return callGeminiAPI({
             contents: [{ parts: [{ text: userPrompt }] }],
