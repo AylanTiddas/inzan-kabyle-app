@@ -952,23 +952,63 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (expectJson) payload.generationConfig = { responseMimeType: "application/json" };
 
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
+        // --- AMÉLIORATION: Ajout d'une logique de relance (Exponential Backoff) ---
+        const MAX_RETRIES = 5;
+        let delay = 1000; // 1 seconde de base
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData?.error?.message || `Erreur HTTP ${response.status}`);
+        for (let i = 0; i < MAX_RETRIES; i++) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    const textResponse = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (!textResponse) throw new Error("Réponse de l'API malformée ou vide.");
+                    
+                    // Si on attend du JSON, on essaie de le parser
+                    if (expectJson) {
+                        try {
+                            return JSON.parse(textResponse);
+                        } catch (e) {
+                            console.error("Erreur de parsing JSON de l'API:", textResponse);
+                            throw new Error("L'API a retourné un JSON malformé.");
+                        }
+                    }
+                    return textResponse; // Sinon, retourner le texte brut
+                }
+
+                // Gérer les erreurs qui méritent une relance (ex: surcharge, erreur serveur)
+                // C'est exactement l'erreur que vous avez mentionnée !
+                if (response.status === 429 || response.status === 503 || response.status === 500) {
+                    console.warn(`API Error ${response.status}. Retrying in ${delay}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2; // Augmentation exponentielle
+                } else {
+                    // Erreur client (ex: 400), ne pas relancer
+                    const errorData = await response.json();
+                    throw new Error(errorData?.error?.message || `Erreur HTTP ${response.status}`);
+                }
+
+            } catch (error) {
+                // Gérer les erreurs réseau qui peuvent aussi nécessiter une relance
+                if (i < MAX_RETRIES - 1) {
+                    console.warn(`Network error. Retrying in ${delay}ms...`, error.message);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                } else {
+                    // Si c'est la dernière tentative, lancer l'erreur
+                    console.error("Échec de l'API après plusieurs tentatives.", error);
+                    throw new Error("Erreur de connexion avec le Sage Artificiel.");
+                }
+            }
         }
         
-        const result = await response.json();
-        const textResponse = result.candidates?.[0]?.content?.parts?.[0]?.text;
-        
-        if (!textResponse) throw new Error("Réponse de l'API malformée ou vide.");
-        
-        return expectJson ? JSON.parse(textResponse) : textResponse;
+        // Si la boucle se termine sans succès
+        throw new Error("Le modèle est surchargé. Veuillez réessayer plus tard.");
     };
 
     const getProverbExplanation = async (proverb) => {
@@ -1390,3 +1430,4 @@ Choisissez les 3 meilleurs et répondez UNIQUEMENT avec l'objet JSON demandé.`;
 </script>
 </body>
 </html>
+
