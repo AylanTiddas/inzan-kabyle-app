@@ -244,6 +244,7 @@
             transform: scale(1.1);
         }
         
+        /* MODIFICATION: Styles du Quiz mis à jour pour le quiz IA */
         .quiz-option {
             border: 2px solid var(--color-border);
             padding: 0.75rem 1rem;
@@ -405,13 +406,26 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- AMÉLIORATION : Footer déplacé hors de l'onglet et caché sur mobile -->
             </section>
 
             <section id="explorer-tab" class="tab-content" aria-labelledby="explorer-title">
                  <div class="sticky top-4 z-20 bg-[var(--color-bg-card)]/80 backdrop-blur-md rounded-xl shadow-lg border border-[var(--color-border)] mb-6">
                     <div class="p-4 space-y-4">
+                        
+                        <!-- NOUVEAU: Barre d'outils Clavier Tamazight -->
+                        <div id="tamazight-keyboard" class="flex gap-2 overflow-x-auto pb-2 custom-scrollbar justify-start sm:justify-center">
+                            <button class="char-btn px-3 py-1.5 rounded shadow-sm text-lg" onclick="insertChar('ɛ')">ɛ</button>
+                            <button class="char-btn px-3 py-1.5 rounded shadow-sm text-lg" onclick="insertChar('ɣ')">ɣ</button>
+                            <button class="char-btn px-3 py-1.5 rounded shadow-sm text-lg" onclick="insertChar('ḥ')">ḥ</button>
+                            <button class="char-btn px-3 py-1.5 rounded shadow-sm text-lg" onclick="insertChar('ḍ')">ḍ</button>
+                            <button class="char-btn px-3 py-1.5 rounded shadow-sm text-lg" onclick="insertChar('ṛ')">ṛ</button>
+                            <button class="char-btn px-3 py-1.5 rounded shadow-sm text-lg" onclick="insertChar('ṣ')">ṣ</button>
+                            <button class="char-btn px-3 py-1.5 rounded shadow-sm text-lg" onclick="insertChar('ṭ')">ṭ</button>
+                            <button class="char-btn px-3 py-1.5 rounded shadow-sm text-lg" onclick="insertChar('ẓ')">ẓ</button>
+                            <button class="char-btn px-3 py-1.5 rounded shadow-sm text-lg" onclick="insertChar('č')">č</button>
+                            <button class="char-btn px-3 py-1.5 rounded shadow-sm text-lg" onclick="insertChar('ǧ')">ǧ</button>
+                        </div>
+
                         <div class="flex flex-col sm:flex-row gap-4 items-stretch">
                             <div class="search-wrapper flex-grow">
                                 <input type="text" id="search-input" placeholder="Rechercher par mot-clé ou thème..." aria-label="Champ de recherche de proverbe" class="w-full p-3 pr-10 border-2 border-[var(--color-border)] rounded-lg focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/30 transition duration-200 text-lg shadow-inner bg-[var(--color-bg-card)]">
@@ -421,12 +435,12 @@
                             </div>
                             <button id="random-btn" aria-label="Afficher un proverbe aléatoire" class="w-full sm:w-auto px-5 py-3 bg-[var(--color-accent)] text-white font-semibold rounded-lg hover:bg-[var(--color-primary)] transition-all duration-300 flex items-center justify-center gap-2 shadow-md transform hover:scale-[1.02]">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M21 21v-5h-5"/></svg>
-                                <span>Aléatoire</span>
+                                <span data-i18n="randomBtn">Aléatoire</span>
                             </button>
                         </div>
                         <nav id="theme-filter-nav" aria-label="Filtres de thèmes Kabyles">
                             <div class="flex items-center gap-3">
-                                <h3 class="text-sm font-bold text-[var(--color-heading)] flex-shrink-0">Thèmes:</h3>
+                                <h3 class="text-sm font-bold text-[var(--color-heading)] flex-shrink-0" data-i18n="themesLabel">Thèmes:</h3>
                                 <div class="flex-grow overflow-x-auto custom-scrollbar">
                                     <div id="theme-list-container" class="flex gap-2 py-1">
                                         <!-- Thèmes chargés par JS -->
@@ -442,12 +456,11 @@
                 <div id="results-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 min-h-[400px]">
                      <div id="initial-load-message" class="md:col-span-2 xl:col-span-3 text-center p-8 bg-[var(--color-bg-card)] rounded-lg shadow-inner flex flex-col items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-[var(--color-text-light)] opacity-70"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-                        <p class="mt-4 text-lg text-[var(--color-text-light)]">Commencez votre recherche pour trouver un proverbe.</p>
-                        <p class="text-md text-[var(--color-text-light)]">Ou cliquez sur "Aléatoire" pour une découverte.</p>
+                        <p class="mt-4 text-lg text-[var(--color-text-light)]" data-i18n="startSearch">Commencez votre recherche pour trouver un proverbe.</p>
+                        <p class="text-md text-[var(--color-text-light)]" data-i18n="orClickRandom">Ou cliquez sur "Aléatoire" pour une découverte.</p>
                     </div>
                 </div>
 
-                <!-- AMÉLIORATION : Ajout de role="status" pour l'accessibilité du loader -->
                 <div id="infinite-scroll-loader" role="status" class="text-center mt-8 p-4 hidden">
                     <span class="loader loader-dark" aria-label="Chargement de plus de proverbes"></span>
                 </div>
@@ -483,17 +496,18 @@
 
              <section id="quiz-tab" class="tab-content" aria-labelledby="quiz-title">
                 <h2 id="quiz-title" class="text-3xl font-serif text-[var(--color-primary)] mb-5 text-center font-semibold">Quiz de Sagesse 🧠</h2>
+                <!-- MODIFICATION: Le conteneur du quiz est maintenant géré par la nouvelle logique IA -->
                 <div id="quiz-container" class="fade-in max-w-3xl mx-auto bg-[var(--color-bg-card)]/95 p-6 rounded-xl shadow-lg border border-[var(--color-border)]">
                     <div class="text-center p-8">
                         <span class="loader loader-dark"></span>
-                        <p class="mt-4 text-sm text-[var(--color-text-light)]">Chargement des données du Quiz...</p>
+                        <p class="mt-4 text-sm text-[var(--color-text-light)]">Chargement du module de Quiz...</p>
                     </div>
                 </div>
             </section>
         </main>
 
-        <!-- AMÉLIORATION : Footer déplacé ici, hors de <main> et des onglets, et caché sur mobile -->
-        <footer class="text-center mt-16 py-6 border-t-2 border-[var(--color-border)] hidden sm:block">
+        <!-- MODIFICATION : Footer rendu visible sur mobile en retirant 'hidden sm:block' -->
+        <footer class="text-center mt-16 py-6 border-t-2 border-[var(--color-border)]">
             <p class="text-[var(--color-text-light)] font-medium">Une collection de la sagesse populaire kabyle.</p>
             <p class="text-sm text-[var(--color-text-light)] mt-1">Application développée par TAMAZIRT Boussad. <button id="about-btn" class="text-[var(--color-primary)] underline">En savoir plus</button>.</p>
         </footer>
@@ -697,22 +711,62 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPage: 0,
         displayedProverbs: [],
         isLoading: false,
-        totalFilteredCount: 0
+        totalFilteredCount: 0,
+        // MODIFICATION: Ajout de l'état pour le nouveau quiz IA
+        aiQuiz: {
+            questions: [], // Sera pré-chargé ici
+            currentQuestionIndex: 0,
+            score: 0,
+            isLoading: false, // Indique si le *pré-chargement* est en cours
+            preloadPromise: null // AMÉLIORATION: Pour suivre le pré-chargement
+        }
     };
 
     // --- FONCTIONS UTILITAIRES ---
     const normalizeText = (text) => {
         if (!text) return '';
-        return text
-            .toLowerCase()
-            .replace(/ǧ/g, 'g')
-            .replace(/č/g, 'c')
-            .replace(/ṣ/g, 's')
-            .replace(/ṭ/g, 't')
-            .replace(/ẓ/g, 'z')
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .trim();
+
+        let normalized = text.toLowerCase().trim();
+
+    // 1. CARACTÈRES COMPLEXES & DIGRAMMES (Priorité haute)
+    // On traite d'abord ce qui "prend de la place" ou a une logique double.
+        normalized = normalized
+            .replace(/ɣ/g, "gh")
+            .replace(/č/g, "tch")
+            .replace(/ǧ/g, "dj")
+            .replace(/ɛ/g, "3")
+            .replace(/xx/g, "kh") // On simplifie le double x en un seul kh
+            .replace(/tt/g, "ts"); // Règle d'affrication kabyle
+
+    // 2. CARACTÈRES EMPHATIQUES
+    // Avant le nettoyage NFD
+        normalized = normalized
+            .replace(/ṣ/g, "s")
+            .replace(/ṭ/g, "t")
+            .replace(/ẓ/g, "z")
+            .replace(/ḍ/g, "d")
+            .replace(/ḥ/g, "h");
+
+    // 3. LETTRES SIMPLES À RISQUE (Avec sécurité)
+        normalized = normalized
+        // Remplace 'u' par 'ou', MAIS SEULEMENT s'il n'y a pas de 'o' juste avant.
+        // Empêche "mouloud" de devenir "moouloud".
+            .replace(/(?<!o)u/g, "ou") 
+        
+        // Remplace 'c' par 'ch', MAIS SEULEMENT s'il n'y a pas de 'h' juste après.
+        // Empêche "chat" de devenir "chhat".
+            .replace(/c(?!h)/g, "ch")
+            .replace(/t(?!h)/g, "th") 
+            .replace(/d(?!h)/g, "dh") 
+        
+        // Remplace 'x' par 'kh', MAIS SEULEMENT s'il n'y a pas de 'k' avant (au cas où).
+            .replace(/(?<!k)x/g, "kh");
+
+    // 4. NETTOYAGE FINAL (Accents standards)
+        normalized = normalized.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    // 5. FINALISATION
+        return normalized.replace(/[^a-z0-9\s]/g, '');
     };
 
     const debounce = (func, delay) => (...args) => {
@@ -750,6 +804,135 @@ document.addEventListener('DOMContentLoaded', () => {
         if (keywords.length === 0) return text;
         const regex = new RegExp(`(${keywords.map(k => k.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('|')})`, 'gi');
         return text.replace(regex, `<span class="search-highlight">$1</span>`);
+    };
+
+    // --- NOUVEAU: CLAVIER VIRTUEL ---
+    window.insertChar = (char) => {
+        const input = dom.searchInput;
+        const start = input.selectionStart;
+        const end = input.selectionEnd;
+        const text = input.value;
+        input.value = text.substring(0, start) + char + text.substring(end);
+        input.selectionStart = input.selectionEnd = start + char.length;
+        input.focus();
+        loadNextChunk(true); // Déclencher la recherche
+    };
+
+    // --- NOUVEAU: TTS (Synthèse Vocale) ---
+    const speakProverb = (text) => {
+        window.speechSynthesis.cancel(); // Arrêter toute lecture en cours
+        const utterance = new SpeechSynthesisUtterance(text);
+        // Essayer de trouver une voix appropriée (Kabyle n'existe pas souvent, on utilise une voix générique ou FR avec accent)
+        utterance.lang = 'fr-FR'; 
+        utterance.rate = 0.9; // Un peu plus lent pour la clarté
+        utterance.pitch = 1;
+        window.speechSynthesis.speak(utterance);
+        showToast("📢 Lecture en cours...");
+    };
+
+    // --- NOUVEAU: GÉNÉRATEUR D'IMAGE SOCIALE (CANVAS) ---
+    const generateSocialImage = (proverb) => {
+        openModal("Aperçu de la carte", `
+            <div class="flex flex-col items-center">
+                <canvas id="share-canvas" width="1080" height="1080" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 1rem;"></canvas>
+                <a id="download-link" href="#" class="px-6 py-3 bg-[var(--color-primary)] text-white font-bold rounded-lg shadow-md hover:scale-105 transition-transform flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Télécharger l'image
+                </a>
+            </div>
+        `);
+
+        const canvas = document.getElementById('share-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // 1. Fond Artistique (Motifs Berbères Simplifiés par Code)
+        const gradient = ctx.createLinearGradient(0, 0, 1080, 1080);
+        gradient.addColorStop(0, '#F9F7F3'); // Couleur crème
+        gradient.addColorStop(1, '#E8E4D9');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 1080, 1080);
+
+        // Dessin de motifs géométriques (Triangles berbères)
+        ctx.fillStyle = 'rgba(74, 124, 89, 0.1)'; // Vert transparent
+        for (let i = 0; i < 12; i++) {
+            ctx.beginPath();
+            ctx.moveTo(i * 100, 0);
+            ctx.lineTo((i * 100) + 50, 100);
+            ctx.lineTo((i * 100) - 50, 100);
+            ctx.fill();
+        }
+        ctx.fillStyle = 'rgba(199, 154, 42, 0.1)'; // Jaune/Or transparent
+        ctx.beginPath();
+        ctx.arc(1000, 80, 200, 0, 2 * Math.PI); // Soleil coin haut droit
+        ctx.fill();
+
+        // Cadre
+        ctx.strokeStyle = '#4A7C59';
+        ctx.lineWidth = 20;
+        ctx.strokeRect(40, 40, 1000, 1000);
+
+        // 2. Texte
+        ctx.fillStyle = '#2F4F4F';
+        ctx.textAlign = 'center';
+        
+        // Configuration police Kabyle
+        ctx.font = 'italic bold 70px "Times New Roman", serif';
+        const kabyleWords = `« ${proverb.kabyle} »`.split(' ');
+        let line = '';
+        let y = 400;
+        const maxWidth = 900;
+        
+        // Word wrap simple pour le Kabyle
+        for(let n = 0; n < kabyleWords.length; n++) {
+            const testLine = line + kabyleWords[n] + ' ';
+            const metrics = ctx.measureText(testLine);
+            if (metrics.width > maxWidth && n > 0) {
+                ctx.fillText(line, 540, y);
+                line = kabyleWords[n] + ' ';
+                y += 90;
+            } else {
+                line = testLine;
+            }
+        }
+        ctx.fillText(line, 540, y);
+
+        // Séparateur
+        y += 60;
+        ctx.beginPath();
+        ctx.moveTo(400, y);
+        ctx.lineTo(680, y);
+        ctx.strokeStyle = '#C79A2A';
+        ctx.lineWidth = 5;
+        ctx.stroke();
+
+        // Configuration police Français
+        y += 80;
+        ctx.font = '40px "Arial", sans-serif';
+        ctx.fillStyle = '#4B5563';
+        const frWords = proverb.francais.split(' ');
+        line = '';
+        for(let n = 0; n < frWords.length; n++) {
+            const testLine = line + frWords[n] + ' ';
+            const metrics = ctx.measureText(testLine);
+            if (metrics.width > maxWidth && n > 0) {
+                ctx.fillText(line, 540, y);
+                line = frWords[n] + ' ';
+                y += 60;
+            } else {
+                line = testLine;
+            }
+        }
+        ctx.fillText(line, 540, y);
+
+        // Footer
+        ctx.font = 'bold 30px "Arial", sans-serif';
+        ctx.fillStyle = '#4A7C59';
+        ctx.fillText("Inzan n Teqbaylit", 540, 980);
+
+        // 3. Préparer le téléchargement
+        const link = document.getElementById('download-link');
+        link.download = `proverbe-kabyle-${proverb.id}.png`;
+        link.href = canvas.toDataURL('image/png');
     };
 
     // --- RENDU UI DYNAMIQUE ---
@@ -919,7 +1102,12 @@ document.addEventListener('DOMContentLoaded', () => {
         dom.tabContents.forEach(content => content.classList.toggle('active', content.id === tabId));
         dom.navButtons.forEach(button => button.classList.toggle('active', button.dataset.tab === tabId));
         if (tabId === 'favoris-tab') renderFavorites();
-        if (tabId === 'quiz-tab' && state.isCoreDataLoaded && !dom.quizContainer.querySelector('#next-quiz-btn')) startQuiz();
+        
+        // MODIFICATION: Logique pour le nouvel onglet Quiz IA
+        if (tabId === 'quiz-tab' && state.isCoreDataLoaded && !dom.quizContainer.querySelector('#quiz-game-screen')) {
+            showQuizStartScreen();
+        }
+        
         if (document.body.clientWidth < 640) window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -985,7 +1173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- NOUVELLE LOGIQUE API GEMINI (PIPELINE RAG) ---
     const callGeminiAPI = async (payload, expectJson = false) => {
         // --- NE PAS TOUCHER ---
-        const GEMINI_API_KEY = "AIzaSyD3cGyEYYhNbFN6WlMKb5wjpdDqfR8RaN4";
+        const GEMINI_API_KEY = "AIzaSyCAcDt3VQ3erxp6Z7QjzW1gKR96h8JHIz4";
         // --- NE PAS TOUCHER ---
         
         if (!GEMINI_API_KEY) throw new Error("La clé API n'est pas configurée dans le code source.");
@@ -1096,7 +1284,7 @@ Répondez UNIQUEMENT avec un objet JSON au format: { "keywords": ["mot1", "mot2"
         const systemPrompt = `Vous êtes un sage kabyle expert en proverbes.
 Analysez la situation de l'utilisateur. On vous fournit une LISTE PRÉ-FILTRÉE de proverbes potentiellement pertinents.
 Votre tâche est de choisir le ou les meilleurs proverbes de cette liste et de justifier brièvement pourquoi chacun est adapté.
-Le nombre n'est pas fixe ; choisissez-en 1, 2, 3, ou plus, tant qu'ils sont hautement pertinents. S'il n'y en a qu'un seul de vraiment bon, n'en choisissez qu'un.
+Le nombre n'est pas fixe ; choisissez-en 1, 2, 3, ou plus, tant qu'ils sont hautement pertinents. S'il n'y en a qu'un seul de vraiment bon, n'en choisissez qu'un, répondez rapidement.
 Répondez OBLIGATOIREMENT avec un objet JSON au format:
 { "reasoning": "Votre analyse générale de la situation en une phrase.", "proverbs": [ { "id": <id_du_proverbe_1>, "justification": "Pourquoi ce proverbe est pertinent." } ] }`;
 
@@ -1174,94 +1362,184 @@ Choisissez le ou les proverbes les plus pertinents (le nombre n'est pas fixe) et
         dom.ai.stepFeedback.textContent = "";
     };
 
-    // --- LOGIQUE DU QUIZ ---
-    const startQuiz = () => {
-        const quizProverbs = [];
-        const usedIds = new Set();
-        const sampleSize = Math.min(50, state.proverbs.length);
-        while(quizProverbs.length < sampleSize) {
-            const randomIndex = Math.floor(Math.random() * state.proverbs.length);
-            const randomProverb = state.proverbs[randomIndex];
-            if (!usedIds.has(randomProverb.id)) {
-                quizProverbs.push(randomProverb);
-                usedIds.add(randomProverb.id);
-            }
-        }
-        if (quizProverbs.length < 4) {
-            dom.quizContainer.innerHTML = `<p class="text-center text-[var(--color-text-light)]">Pas assez de données pour générer un quiz.</p>`;
-            return;
-        }
-        const questionType = Math.random() < 0.5 ? 'meaning' : 'theme';
-        if (questionType === 'meaning') {
-            generateMeaningQuestion(quizProverbs);
-        } else {
-            generateThemeQuestion(quizProverbs);
-        }
-    };
+    // --- MODIFICATION: NOUVELLE LOGIQUE DE QUIZ IA (Basée sur les demandes utilisateur) ---
 
-    const generateMeaningQuestion = (quizProverbs) => {
-        const correctAnswer = quizProverbs[Math.floor(Math.random() * quizProverbs.length)];
-        let options = [correctAnswer];
-        while (options.length < 4) {
-            const randomOption = quizProverbs[Math.floor(Math.random() * quizProverbs.length)];
-            if (!options.some(opt => opt.id === randomOption.id)) {
-                options.push(randomOption);
-            }
-        }
-        options.sort(() => Math.random() - 0.5);
+    const showQuizStartScreen = () => {
         dom.quizContainer.innerHTML = `
-            <p class="text-center text-lg mb-4">Que signifie ce proverbe ?</p>
-            <p class="text-2xl font-serif text-center font-bold text-[var(--color-heading)] mb-6 p-4 bg-[var(--color-bg-alt)] rounded-lg">« ${correctAnswer.kabyle} »</p>
-            <div id="quiz-options" class="space-y-3">
-                ${options.map(opt => `<div class="quiz-option" data-id="${opt.id}" tabindex="0">${opt.francais}</div>`).join('')}
-            </div><div id="quiz-feedback" class="mt-6 text-center"></div>`;
-        
-        const optionsContainer = dom.quizContainer.querySelector('#quiz-options');
-        const handleSelection = (target) => {
-            const selectedOption = target.closest('.quiz-option');
-            if (selectedOption && !selectedOption.hasAttribute('disabled')) {
-                handleQuizAnswer(selectedOption, correctAnswer, 'meaning', quizProverbs);
-            }
-        };
-        optionsContainer.addEventListener('click', (e) => handleSelection(e.target));
-        optionsContainer.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleSelection(e.target);
-            }
-        });
-    };
-    
-    const generateThemeQuestion = (quizProverbs) => {
-        const proverb = quizProverbs[Math.floor(Math.random() * quizProverbs.length)];
-        const correctThemes = (proverb.theme || '').split(/[,/]/).map(t => t.trim().replace(/[()]/g, '')).filter(Boolean);
-        if (correctThemes.length === 0) {
-            startQuiz();
-            return;
-        }
-        const correctAnswer = correctThemes[Math.floor(Math.random() * correctThemes.length)];
-        const uniqueThemesForOptions = [...new Set(quizProverbs.flatMap(p => (p.theme || '').split(/[,/]/).map(t => t.trim().replace(/[()]/g, '')).filter(Boolean)))];
-        let options = [correctAnswer];
-        while (options.length < 4 && options.length < uniqueThemesForOptions.length) {
-            const randomTheme = uniqueThemesForOptions[Math.floor(Math.random() * uniqueThemesForOptions.length)];
-            if (!options.includes(randomTheme)) options.push(randomTheme);
-        }
-        options.sort(() => Math.random() - 0.5);
-        dom.quizContainer.innerHTML = `
-            <p class="text-center text-lg mb-4">Quel est le thème principal de ce proverbe ?</p>
-            <div class="mb-6 p-4 bg-[var(--color-bg-alt)] rounded-lg text-center">
-                <p class="text-xl font-serif font-bold text-[var(--color-heading)] italic">« ${proverb.kabyle} »</p>
-                <p class="text-[var(--color-text-light)]">— ${proverb.francais}</p>
+            <div id="quiz-start-screen" class="text-center">
+                <p class="text-lg text-[var(--color-text-light)] mb-6">Prêt à tester vos connaissances sur les proverbes de notre collection ?</p>
+                <button id="start-ai-quiz-btn" class="w-full px-6 py-3 bg-[var(--color-primary)] text-white font-bold rounded-lg hover:bg-[var(--color-secondary)] transition-all duration-300 flex items-center justify-center gap-2 shadow-md transform hover:scale-[1.02]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                    <span>Lancer le Quiz IA (10 Questions)</span>
+                </button>
             </div>
-            <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                ${options.map(opt => `<div class="quiz-option text-center" data-theme="${opt}" tabindex="0">${opt}</div>`).join('')}
-            </div><div id="quiz-feedback" class="mt-6 text-center"></div>`;
+            <div id="quiz-game-screen" class="hidden">
+                <!-- Le contenu du quiz dynamique sera injecté ici -->
+            </div>
+        `;
+        document.getElementById('start-ai-quiz-btn').addEventListener('click', handleStartAiQuiz);
+    };
+
+    // AMÉLIORATION: Logique pour pré-charger le quiz et stocker la promesse
+    const preloadQuizQuestions = async () => {
+        if (state.aiQuiz.preloadPromise) {
+            return state.aiQuiz.preloadPromise; // Déjà en cours ou terminé
+        }
+        state.aiQuiz.isLoading = true;
+        console.log("Lancement du pré-chargement du quiz en arrière-plan...");
+
+        // Créer la promesse et la stocker
+        state.aiQuiz.preloadPromise = (async () => {
+            try {
+                const quizData = await fetchAndGenerateAiQuiz(); // Utilise la fonction de génération
+                if (quizData && quizData.questions && quizData.questions.length > 0) {
+                    state.aiQuiz.questions = quizData.questions;
+                    console.log("Quiz pré-chargé avec succès.");
+                } else {
+                    throw new Error("L'IA n'a pas pu générer de questions valides.");
+                }
+            } catch (error) {
+                console.warn("Échec du pré-chargement du quiz:", error.message);
+                state.aiQuiz.questions = []; 
+                state.aiQuiz.preloadPromise = null; // Permettre une nouvelle tentative en cas d'échec
+                throw error; // Renvoyer l'erreur pour que l'appelant puisse la gérer
+            } finally {
+                state.aiQuiz.isLoading = false;
+            }
+        })();
         
-        const optionsContainer = dom.quizContainer.querySelector('#quiz-options');
+        return state.aiQuiz.preloadPromise;
+    };
+
+    // AMÉLIORATION: Logique de démarrage du quiz mise à jour pour être plus fluide
+    const handleStartAiQuiz = async () => {
+        // Si les questions sont déjà prêtes (pré-chargées et non en cours de chargement)
+        if (state.aiQuiz.questions.length > 0 && !state.aiQuiz.isLoading) {
+            console.log("Démarrage du quiz avec les questions pré-chargées.");
+            startQuizUI(); // Fonction séparée pour démarrer l'UI
+            return;
+        }
+
+        // Afficher le spinner universel (soit pour le pré-chargement en cours, soit pour la demande)
+         dom.quizContainer.innerHTML = `
+            <div class="text-center p-8">
+                <span class="loader loader-dark"></span>
+                <p class="mt-4 text-sm text-[var(--color-text-light)]">Le Sage Artificiel prépare vos questions...</p>
+                <p class="text-xs text-[var(--color-text-light)]">(${state.aiQuiz.isLoading ? 'Pré-chargement en cours...' : 'Lancement...'})</p>
+            </div>`;
+
+        try {
+            // Attendre la promesse de pré-chargement (si elle existe) ou la lancer (si elle n'existe pas)
+            // preloadQuizQuestions() va maintenant soit la lancer, soit retourner la promesse existante.
+            await preloadQuizQuestions(); 
+            
+            // Si nous arrivons ici, le chargement (qu'il soit "pré" ou "à la demande") a réussi
+            startQuizUI();
+
+        } catch (error) {
+            // Le pré-chargement ou le chargement à la demande a échoué
+            console.error("Échec du chargement du quiz:", error);
+            dom.quizContainer.innerHTML = `
+                <div class="text-center text-red-500">
+                    <p><strong>Erreur lors de la génération du quiz.</strong></p>
+                    <p class="text-sm mt-2">${error.message}</p>
+                    <button id="retry-ai-quiz-btn" class="mt-4 px-5 py-2 bg-[var(--color-primary)] text-white font-semibold rounded-lg shadow-md hover:scale-[1.02] transition-transform">Réessayer</button>
+                </div>`;
+            document.getElementById('retry-ai-quiz-btn').addEventListener('click', showQuizStartScreen);
+            // Réinitialiser la promesse pour permettre une nouvelle tentative
+            state.aiQuiz.preloadPromise = null; 
+        }
+    };
+
+    // AMÉLIORATION: Fonction séparée pour démarrer l'UI du quiz
+    const startQuizUI = () => {
+        state.aiQuiz.currentQuestionIndex = 0;
+        state.aiQuiz.score = 0;
+        // S'assurer que le conteneur est prêt
+        if (!dom.quizContainer.querySelector('#quiz-game-screen') || dom.quizContainer.querySelector('#quiz-start-screen')) {
+             dom.quizContainer.innerHTML = `<div id="quiz-game-screen"></div>`;
+        }
+        displayAiQuizQuestion();
+    };
+
+    // MODIFICATION: La fonction de génération est maintenant basée sur proverbs.json
+    const fetchAndGenerateAiQuiz = async () => {
+        // 1. Sélectionner un échantillon de proverbes de la base de données locale
+        const shuffled = [...state.proverbs].sort(() => 0.5 - Math.random());
+        // Prendre un échantillon plus grand pour donner plus de choix à l'IA
+        const proverbSample = shuffled.slice(0, 30).map(p => ({
+            kabyle: p.kabyle,
+            francais: p.francais,
+            theme: p.theme
+        }));
+        const proverbListJSON = JSON.stringify(proverbSample);
+
+        // 2. Définir le prompt système
+        const systemPrompt = `Vous êtes un expert de la culture kabyle. Générez un quiz à choix multiples de 10 questions.
+IMPORTANT : Vous DEVEZ baser TOUTES vos questions UNIQUEMENT sur la LISTE de proverbes fournie par l'utilisateur.
+Ne créez pas de questions sur des proverbes qui ne sont pas dans cette liste.
+Variez les types de questions :
+1.  Donner un proverbe en kabyle, demander sa signification en français.
+2.  Donner un proverbe en français, demander l'original en kabyle.
+3.  Donner un proverbe français, demander l'équivalent en kabyle.
+4.  Donner le début d'un proverbe, demander de le compléter.
+5.  Donner une situation (basée sur le thème), demander quel proverbe de la liste s'applique.
+
+Répondez OBLIGATOIREMENT avec un objet JSON au format suivant (assurez-vous que le JSON est valide) :
+{
+  "questions": [
+    {
+      "question": "Question ici...",
+      "options": [ "Option A", "Option B", "Option C", "Option D" ],
+      "correctAnswerIndex": 0,
+      "explanation": "Brève explication de la bonne réponse (peut inclure le proverbe complet)."
+    }
+  ]
+}`;
+        // 3. Définir le prompt utilisateur avec la liste
+        const userPrompt = `Voici la liste des proverbes à utiliser OBLIGATOIREMENT :
+${proverbListJSON}
+
+Génère 10 questions de quiz basées EXCLUSIVEMENT sur cette liste, en suivant le format JSON demandé.`;
+        
+        // 4. Appeler l'API
+        return callGeminiAPI({
+            contents: [{ parts: [{ text: userPrompt }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] }
+        }, true); // true pour s'attendre à du JSON
+    };
+
+    const displayAiQuizQuestion = () => {
+        const gameScreen = dom.quizContainer.querySelector('#quiz-game-screen');
+        if (!gameScreen) return; // Sécurité
+
+        const q = state.aiQuiz.questions[state.aiQuiz.currentQuestionIndex];
+        if (!q) {
+            showAiQuizResults();
+            return;
+        }
+
+        const optionsHtml = q.options.map((option, index) =>
+            `<div class="quiz-option" data-index="${index}" tabindex="0">${option}</div>`
+        ).join('');
+
+        gameScreen.innerHTML = `
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-sm font-bold text-[var(--color-primary)]">Question ${state.aiQuiz.currentQuestionIndex + 1} / ${state.aiQuiz.questions.length}</span>
+                <span class="text-sm font-bold text-[var(--color-heading)]">Score: ${state.aiQuiz.score}</span>
+            </div>
+            <p class="text-xl font-serif text-center font-bold text-[var(--color-heading)] mb-6 p-4 bg-[var(--color-bg-alt)] rounded-lg">${q.question}</p>
+            <div id="quiz-options" class="space-y-3">
+                ${optionsHtml}
+            </div>
+            <div id="quiz-feedback-ai" class="mt-6 text-center"></div>
+        `;
+
+        const optionsContainer = gameScreen.querySelector('#quiz-options');
         const handleSelection = (target) => {
             const selectedOption = target.closest('.quiz-option');
             if (selectedOption && !selectedOption.hasAttribute('disabled')) {
-                handleQuizAnswer(selectedOption, correctAnswer, 'theme', quizProverbs);
+                handleAiQuizAnswer(parseInt(selectedOption.dataset.index));
             }
         };
         optionsContainer.addEventListener('click', (e) => handleSelection(e.target));
@@ -1273,28 +1551,73 @@ Choisissez le ou les proverbes les plus pertinents (le nombre n'est pas fixe) et
         });
     };
 
-    const handleQuizAnswer = (selectedElement, correctAnswer, type) => {
-        const isCorrect = (type === 'meaning') ?
-            parseInt(selectedElement.dataset.id) === correctAnswer.id :
-            normalizeText(selectedElement.dataset.theme) === normalizeText(correctAnswer);
-        document.querySelectorAll('.quiz-option').forEach(el => {
+    const handleAiQuizAnswer = (selectedIndex) => {
+        const q = state.aiQuiz.questions[state.aiQuiz.currentQuestionIndex];
+        const isCorrect = selectedIndex === q.correctAnswerIndex;
+        if (isCorrect) {
+            state.aiQuiz.score++;
+        }
+
+        document.querySelectorAll('.quiz-option').forEach((el, index) => {
             el.setAttribute('disabled', true);
-            const elIsCorrect = (type === 'meaning') ?
-                parseInt(el.dataset.id) === correctAnswer.id :
-                normalizeText(el.dataset.theme) === normalizeText(correctAnswer);
-            if(elIsCorrect) el.classList.add('correct');
+            if (index === q.correctAnswerIndex) {
+                el.classList.add('correct');
+            } else if (index === selectedIndex) {
+                el.classList.add('incorrect');
+            }
         });
-        if(!isCorrect) selectedElement.classList.add('incorrect');
-        const feedback = dom.quizContainer.querySelector('#quiz-feedback');
-        const correctAnswerText = type === 'meaning' ? correctAnswer.francais : correctAnswer;
+
+        const feedback = dom.quizContainer.querySelector('#quiz-feedback-ai');
         feedback.innerHTML = `
-            <p class="text-xl font-bold ${isCorrect ? 'text-green-500' : 'text-red-500'}">${isCorrect ? 'Bravo !' : 'Dommage !'}</p>
-            ${!isCorrect ? `<p class="mt-2">La bonne réponse était : <strong class="font-semibold">"${correctAnswerText}"</strong></p>` : ''}
-            <button id="next-quiz-btn" class="mt-4 px-6 py-2 bg-[var(--color-primary)] text-white font-semibold rounded-lg shadow-md hover:scale-105 transition-transform">Question suivante</button>`;
-        const nextBtn = document.getElementById('next-quiz-btn');
-        nextBtn.addEventListener('click', startQuiz);
+            <div class="p-4 rounded-lg ${isCorrect ? 'bg-green-50 dark:bg-green-900/20' : 'bg-red-50 dark:bg-red-900/20'}">
+                <p class="text-xl font-bold ${isCorrect ? 'text-green-600' : 'text-red-600'}">${isCorrect ? 'Bravo !' : 'Dommage !'}</p>
+                <p class="mt-2 text-[var(--color-text)]">${q.explanation}</p>
+            </div>
+            <button id="next-ai-quiz-btn" class="mt-4 w-full px-6 py-2 bg-[var(--color-primary)] text-white font-semibold rounded-lg shadow-md hover:scale-105 transition-transform">
+                ${state.aiQuiz.currentQuestionIndex === state.aiQuiz.questions.length - 1 ? 'Voir les résultats' : 'Question suivante'}
+            </button>
+        `;
+        const nextBtn = document.getElementById('next-ai-quiz-btn');
+        nextBtn.addEventListener('click', handleAiQuizNext);
         nextBtn.focus();
     };
+
+    const handleAiQuizNext = () => {
+        state.aiQuiz.currentQuestionIndex++;
+        if (state.aiQuiz.currentQuestionIndex < state.aiQuiz.questions.length) {
+            displayAiQuizQuestion();
+        } else {
+            showAiQuizResults();
+        }
+    };
+
+    const showAiQuizResults = () => {
+        const gameScreen = dom.quizContainer.querySelector('#quiz-game-screen');
+        if (!gameScreen) return;
+        
+        // AMÉLIORATION: Réinitialiser les questions ET la promesse pour forcer un nouveau pré-chargement
+        state.aiQuiz.questions = [];
+        state.aiQuiz.isLoading = false; 
+        state.aiQuiz.preloadPromise = null; // Important
+        
+        // Lancer un nouveau pré-chargement pour la prochaine partie
+        setTimeout(preloadQuizQuestions, 1000); 
+
+        gameScreen.innerHTML = `
+            <div class="text-center">
+                <h3 class="text-2xl font-serif font-bold text-[var(--color-heading)] mb-4">Quiz Terminé !</h3>
+                <p class="text-4xl font-bold text-[var(--color-primary)] mb-2">${state.aiQuiz.score} / 10</p>
+                <p class="text-lg text-[var(--color-text-light)] mb-8">Un excellent score !</p>
+                <button id="restart-ai-quiz-btn" class="w-full px-6 py-3 bg-[var(--color-primary)] text-white font-semibold rounded-lg shadow-md hover:bg-[var(--color-secondary)] transition-all">
+                    Recommencer un quiz
+                </button>
+            </div>
+        `;
+        document.getElementById('restart-ai-quiz-btn').addEventListener('click', showQuizStartScreen);
+    };
+
+    // --- FIN DE LA NOUVELLE LOGIQUE DE QUIZ IA ---
+
 
     // --- GESTION DES ÉVÉNEMENTS ---
     const setupInfiniteScroll = () => {
@@ -1473,6 +1796,15 @@ Choisissez le ou les proverbes les plus pertinents (le nombre n'est pas fixe) et
                     loadNextChunk(true);
                 }
                 
+                // MODIFICATION: Initialiser le quiz IA si c'est l'onglet actif (au cas où)
+                if (dom.quizContainer.offsetParent) { // vérifie si l'onglet quiz est visible
+                     showQuizStartScreen();
+                }
+
+                // MODIFICATION: Lancer le pré-chargement du quiz en arrière-plan
+                // On attend 1 seconde pour ne pas surcharger le thread principal au démarrage
+                setTimeout(preloadQuizQuestions, 1000);
+
                 setTimeout(() => dom.splashScreen.classList.add('hidden'), 500);
             })
             .catch(error => {
@@ -1487,7 +1819,7 @@ Choisissez le ou les proverbes les plus pertinents (le nombre n'est pas fixe) et
                 dom.initialLoadMessage.classList.add('hidden');
                 dom.proverbOfTheDayCard.innerHTML = `<p class="text-center text-red-500">Erreur critique des données.</p>`;
                 dom.themeListContainer.innerHTML = `<p class="text-center text-red-500 text-sm">Erreur.</p>`;
-                dom.quizContainer.innerHTML = `<p class="text-center text-red-500">Erreur de chargement des données.</p>`;
+                dom.quizContainer.innerHTML = `<p class="text-center text-red-500">Erreur de chargement des données. Le quiz ne peut pas démarrer.</p>`;
                 setTimeout(() => dom.splashScreen.classList.add('hidden'), 100);
             });
     };
