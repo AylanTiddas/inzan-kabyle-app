@@ -1138,18 +1138,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const callGeminiAPI = async (payload, expectJson = false) => {
     // Appel de la variable d'environnement Vercel
-    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+        const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
     
     // Vérification de sécurité
     if (!GEMINI_API_KEY) {
         throw new Error("La clé API 'GEMINI_API_KEY' n'est pas configurée dans les variables d'environnement.");
     }
 
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${GEMINI_API_KEY}`;
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${GEMINI_API_KEY}`;
     
     if (expectJson) payload.generationConfig = { responseMimeType: "application/json" };
 
-    const MAX_RETRIES = 5;
+        const MAX_RETRIES = 5;
     let delay = 1000; 
 
     for (let i = 0; i < MAX_RETRIES; i++) {
@@ -1203,6 +1203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     throw new Error("Le modèle est surchargé. Veuillez réessayer plus tard.");
+    
     };
 
     const getProverbExplanation = async (proverb) => {
